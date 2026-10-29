@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nur Shamilla Selamat</title>
+<meta name="description" content="Ts. Nur Shamilla Selamat, Senior Lecturer in Computer Science, Southern University College. Publications, awards and innovation projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<style>
+/* Cream studio page; the "pink sunset" palette carries the room, accents and the dusk-plum hologram stage */
+:root{
+  color-scheme: light;
+  --bg:#F5EFE6; --bg2:#F7E6DE; --ink:#2E1F2B; --muted:#76626C; --card:#FFFCFA; --line:#EBD9D3;
+  --apricot:#FFC57D; --peach:#FFB288; --salmon:#FF9E9E; --lemon:#FFF591; --pink:#FFAAC4;
+  --accent:#FF9E9E; --accent-h:#FFAAC4; --rose:#C9506A; --plum:#4A2350; --dusk:#2E1838;
+  --gold:#E3B23C; --silver:#AEB6C2; --bronze:#C7864A; --special:#9B5DC8;
+  --display:'Outfit',system-ui,sans-serif; --body:'DM Sans',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;text-wrap:balance}
+:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:16px 16px auto 16px;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none;transition:color .4s}
+.nav>*{pointer-events:auto}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--ink);color:var(--bg);font:800 17px/1 var(--display);letter-spacing:-.5px;text-decoration:none;transition:background .4s,color .4s}
+.pill{display:flex;gap:2px;padding:5px;border-radius:999px;background:rgba(255,252,250,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);transition:background .4s,border-color .4s}
+.pill a{font:600 12.5px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:10px 15px;border-radius:999px;transition:background .2s}
+.pill a:hover{background:rgba(255,158,158,.25)}
+.cta{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;background:var(--accent);color:var(--ink);font:700 13px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:14px 20px;box-shadow:0 6px 18px rgba(255,158,158,.5);transition:transform .15s,background .2s;text-decoration:none}
+.cta:hover{background:var(--accent-h);transform:translateY(-1px)}
+.cta svg{width:16px;height:16px}
+.nav.dark{color:#fff}
+.nav.dark .pill{background:rgba(46,24,56,.55);border-color:rgba(255,170,196,.3)}
+.nav.dark .pill a:hover{background:rgba(255,170,196,.2)}
+.nav.dark .logo{background:#fff;color:var(--plum)}
+@media (max-width:860px){.pill{display:none}.cta span{display:none}.cta{padding:13px}}
+
+/* ---------- 3D stage ---------- */
+#stage{position:relative;height:420vh}
+.sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
+#scene{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+.layer{position:absolute;inset:0;pointer-events:none;transition:opacity .25s}
+#lHolo,.pin{opacity:0}
+.sticky{border-radius:0 0 48px 48px;background:var(--dusk)}
+.roomPanel{position:absolute;inset:0;background:var(--bg);border-radius:0 0 48px 48px;will-change:transform}
+.layer a,.layer button{pointer-events:auto}
+
+.hero{display:flex;flex-direction:column;justify-content:center;padding:0 7vw}
+.hero .eyebrow{font:600 13px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.hero h1{font-size:clamp(48px,7.4vw,112px);font-weight:800;letter-spacing:-.02em;max-width:8.5ch}
+.tag{display:inline-block;margin-top:18px;background:var(--plum);color:#fff;font:700 13px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:9px 13px;transform:rotate(-4deg);box-shadow:4px 4px 0 var(--apricot)}
+.hero p{max-width:31ch;font-size:clamp(16px,1.35vw,19px);color:var(--muted);margin:26px 0}
+.hero .actions{display:flex;gap:10px;flex-wrap:wrap}
+.hint{margin-top:22px;font:600 12px/1.4 var(--mono);letter-spacing:.06em;color:var(--muted)}
+@media (max-width:860px){.hint{display:none}}
+.ghost{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;font:700 13px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:13px 19px;text-decoration:none}
+.ghost:hover{background:var(--ink);color:var(--bg)}
+.scrollhint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.mouse{width:22px;height:34px;border:2px solid currentColor;border-radius:12px;position:relative}
+.mouse::after{content:"";position:absolute;left:50%;top:6px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:currentColor;animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(9px)}}
+@media (max-width:860px){
+  .hero{justify-content:flex-start;padding:96px 20px 0}
+  .hero h1{font-size:clamp(42px,12vw,64px)}
+  .hero p{margin:18px 0}
+  .scrollhint{display:none}
+}
+
+
+.pins{position:absolute;inset:0;pointer-events:none}
+.pin{position:absolute;left:0;top:0;pointer-events:auto;display:flex;align-items:center;gap:7px;padding:8px 12px 8px 9px;border-radius:999px;border:0;background:var(--ink);color:#fff;font:700 12px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:opacity .2s,background .2s;will-change:transform}
+.pin i{width:8px;height:8px;border-radius:50%;background:var(--salmon);box-shadow:0 0 0 4px rgba(255,158,158,.35);animation:pulse 1.8s infinite}
+.pin:hover,.pin.hot{background:var(--rose)}
+.pin:hover i,.pin.hot i{background:#fff}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(255,158,158,0)}}
+
+.holo{color:#FFEFF4}
+.hcard{position:absolute;background:rgba(46,24,56,.62);border:1px solid rgba(255,170,196,.42);border-radius:14px;padding:16px 18px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font-family:var(--mono);font-size:13px;line-height:1.55;box-shadow:0 0 30px rgba(255,170,196,.14)}
+.hcard h3{font-family:var(--mono);font-size:19px;font-weight:700;margin-bottom:6px;color:#fff}
+.hcard .k{color:var(--pink);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;display:block}
+.hcard ul{margin:0;padding:0;list-style:none}
+.hcard li{padding-left:14px;position:relative}
+.hcard li::before{content:"›";position:absolute;left:0;color:var(--apricot)}
+.hcard{opacity:0;transform:translateY(12px);transition:opacity .45s,transform .45s}
+.hcard.on{opacity:1;transform:none}
+.hcard p{margin:0 0 12px}
+.hc1{left:7vw;top:20vh;max-width:300px}
+.hsum{left:5vw;bottom:10vh;max-width:380px}
+.hc2{right:6vw;top:16vh;max-width:330px}
+.hc3{right:6vw;bottom:12vh;max-width:330px}
+.stats{display:grid;grid-template-columns:repeat(4,auto);gap:6px 18px;padding-top:12px;border-top:1px solid rgba(255,170,196,.25)}
+.stat b{display:block;font:800 30px/1 var(--display);color:#fff;font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pink)}
+.counter{position:absolute;left:0;top:0;font:700 22px/1 var(--mono);color:#fff;background:var(--dusk);border:1px solid rgba(255,170,196,.55);padding:6px 10px;border-radius:6px;letter-spacing:.1em;text-align:center;font-variant-numeric:tabular-nums}
+.links{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.links path{fill:none;stroke:rgba(255,170,196,.75);stroke-width:1.3}
+.links circle{fill:var(--pink);filter:drop-shadow(0 0 6px var(--pink))}
+@media (max-width:860px){
+  .hcard{font-size:11.5px;padding:11px 13px}
+  .hcard h3{font-size:15px}
+  .hc1{left:16px;right:16px;top:80px;max-width:none}
+  .hsum{left:16px;right:16px;bottom:20px;max-width:none}
+  .hc2,.hc3,.links,.counter{display:none}
+  .stats{grid-template-columns:repeat(4,1fr);gap:6px}
+  .stat b{font-size:22px}.stat span{font-size:9px}
+}
+
+.loader{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity .6s, visibility .6s}
+.loader.gone{opacity:0;visibility:hidden}
+.loader div{font:600 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:16px}
+.loader div::before{content:"";width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--apricot),var(--pink));animation:spin 1.2s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- content sections ---------- */
+section.block{padding:120px 7vw;position:relative}
+.wrap{max-width:1180px;margin:0 auto}
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+.kicker{display:inline-block;background:var(--plum);color:#fff;font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 9px;transform:rotate(-4deg);margin-bottom:10px;box-shadow:3px 3px 0 var(--salmon)}
+.shead h2{font-size:clamp(40px,5.4vw,72px);font-weight:800;letter-spacing:-.02em}
+.shead p{max-width:44ch;color:var(--muted);margin:0}
+@media (max-width:860px){section.block{padding:80px 16px}.shead{margin-bottom:28px}}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 15px;font:600 13px/1 var(--display);letter-spacing:.04em;color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip em{font-style:normal;opacity:.55;margin-left:4px}
+
+.pubyear{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:22px 0;border-top:1.5px solid var(--line)}
+.pubyear>h3{font-size:34px;font-weight:800;color:var(--rose);font-variant-numeric:tabular-nums}
+.pubs{display:grid;gap:12px}
+.pub{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:6px 18px;align-items:start;transition:transform .15s,box-shadow .15s}
+.pub:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(46,31,43,.07)}
+.pub>*{min-width:0}
+.pub h4{margin:0;font:600 17.5px/1.3 var(--display);grid-column:1}
+.pub .au{font-size:14px;color:var(--muted);grid-column:1}
+.pub .au b{color:var(--ink);font-weight:700}
+.pub .venue{font-size:14px;grid-column:1;font-style:italic}
+.pub .type{grid-column:2;grid-row:1;font:700 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:6px 8px;border-radius:6px;white-space:nowrap}
+.type.journal{background:#FFE0EA;color:#8A2A4F}
+.type.proceedings{background:#FFE7D2;color:#8A4A12}
+.type.seminar{background:#FFF8C9;color:#6B5A00}
+.type.talk{background:#EFDDF3;color:var(--plum)}
+.pub a.link{grid-column:2;grid-row:2 / span 2;align-self:end;justify-self:end;font:700 12px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1.5px solid var(--ink);border-radius:999px;padding:9px 13px;white-space:nowrap}
+.pub a.link:hover{background:var(--ink);color:#fff}
+@media (max-width:860px){.pubyear{grid-template-columns:1fr;gap:10px}.pubyear>h3{font-size:26px}.pub{grid-template-columns:1fr}.pub .type{grid-column:1;grid-row:auto;justify-self:start}.pub a.link{grid-column:1;grid-row:auto;justify-self:start}}
+
+.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:40px}
+.mtile{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;align-items:center;gap:16px}
+.mtile b{font:800 44px/1 var(--display);display:block;font-variant-numeric:tabular-nums}
+.mtile span{font:700 11.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:860px){.medals{grid-template-columns:repeat(2,1fr)}.mtile{padding:16px;gap:10px}.mtile b{font-size:34px}.mtile svg{width:38px;height:38px}}
+.awards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.award{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.award>div{min-width:0}
+.award .lvl{font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;display:block}
+.award h4{margin:0 0 4px;font:600 16px/1.3 var(--display)}
+.award p{margin:0;font-size:13.5px;color:var(--muted)}
+@media (max-width:860px){.awards{grid-template-columns:1fr}}
+
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.proj{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--salmon);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.proj:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(46,31,43,.09)}
+.proj .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.proj h4{margin:0;font:700 18px/1.25 var(--display)}
+.proj p{margin:0;font-size:14px;color:var(--muted)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tags span{font:700 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--bg2);padding:6px 8px;border-radius:6px}
+.wins{margin-top:auto;display:flex;flex-direction:column;gap:6px;padding-top:8px;border-top:1px dashed var(--line)}
+.wins div{display:flex;align-items:center;gap:8px;font-size:13px}
+.proj a{font:700 12px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--rose);text-decoration:none}
+@media (max-width:1000px){.projects{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.projects{grid-template-columns:1fr}}
+
+.cols{display:grid;grid-template-columns:1.3fr 1fr;gap:48px}
+.cols>*{min-width:0}
+@media (max-width:900px){.cols{grid-template-columns:1fr}}
+.subh{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+.certs{display:grid;gap:10px}
+.cert{display:flex;justify-content:space-between;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:14.5px}
+.cert b{font-family:var(--display);font-weight:600}
+.cert span{font:600 12px/1 var(--mono);color:var(--muted);white-space:nowrap}
+.jury{list-style:none;padding:0;margin:0;display:grid}
+.jury li{font-size:14.5px;padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:110px 1fr;gap:14px}
+.jury li>span{font:600 12px/1.6 var(--mono);color:var(--rose)}
+.jury li small{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+@media (max-width:640px){.jury li{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- contact / QR ---------- */
+#contact{background:var(--dusk);color:#fff;overflow:hidden}
+#contact::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,170,196,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,170,196,.09) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 70% 50%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 70% 50%,#000 20%,transparent 75%)}
+#contact::after{content:"";position:absolute;right:-10%;top:-30%;width:60%;height:120%;background:radial-gradient(circle,rgba(255,158,158,.28),transparent 60%);pointer-events:none}
+#contact .kicker{background:var(--salmon);color:var(--ink);box-shadow:3px 3px 0 var(--apricot)}
+#contact .shead p{color:rgba(255,255,255,.72)}
+.contact{display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;position:relative;z-index:1}
+.contact .lines{display:grid;gap:12px;max-width:520px}
+.cline{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);text-decoration:none;font-size:15px}
+.cline>div{min-width:0;overflow-wrap:anywhere}
+a.cline:hover{background:rgba(255,255,255,.11)}
+.cline small{display:block;font:700 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.cline svg{width:22px;height:22px;flex:none;color:var(--apricot)}
+.qrcard{background:#fff;color:var(--ink);border-radius:24px;padding:22px;width:340px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:#F7E6DE;padding:4px;border-radius:12px;margin-bottom:16px}
+.seg button{border:0;background:transparent;padding:10px;border-radius:9px;font:700 12px/1 var(--display);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.qrcard canvas{width:100%;height:auto;display:block;border-radius:10px}
+.qrcap{text-align:center;font-size:13px;color:var(--muted);margin:12px 0 14px;min-height:2.6em}
+.qrbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qrbtns button{border:1.5px solid var(--ink);background:#fff;border-radius:999px;padding:11px;font:700 12px/1 var(--display);letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+.qrbtns button.primary{background:var(--accent);border-color:var(--accent)}
+@media (max-width:900px){.contact{grid-template-columns:1fr}.qrcard{width:100%;max-width:380px;margin:0 auto}}
+
+.present{position:fixed;inset:0;z-index:90;background:rgba(245,239,230,.97);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center}
+.present.open{display:flex}
+.present canvas{width:min(78vw,62vh);height:auto;border-radius:16px;background:#fff;box-shadow:0 20px 50px rgba(46,31,43,.15)}
+.present h3{font-size:clamp(26px,4vw,40px);font-weight:800}
+.present p{margin:0;color:var(--muted)}
+.present .x{position:absolute;top:18px;right:18px;width:46px;height:46px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:22px}
+.present .seg{width:min(360px,90vw);margin:0}
+
+footer{padding:28px 7vw;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);background:var(--bg)}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader"><div>Setting up the office…</div></div>
+
+<nav class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Back to top">NS</a>
+  <div class="pill">
+    <a href="#about" data-stage="0.95">About</a>
+    <a href="#publications">Publications</a>
+    <a href="#awards">Awards</a>
+    <a href="#projects">Projects</a>
+    <a href="#service">Jury</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="cta" id="openPresent" aria-label="Show my QR code">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM20 14v1M14 20h1M18 18h3v3"/></svg>
+    <span>Scan my card</span>
+  </button>
+</nav>
+
+<div id="top"></div>
+<div id="stage">
+  <div class="sticky" id="sticky">
+    <div class="roomPanel" id="roomPanel"></div>
+    <canvas id="scene" aria-label="Interactive 3D office. Click objects to jump to sections."></canvas>
+
+    <div class="layer hero" id="lHero">
+      <div class="eyebrow">Ts. · PhD candidate · Johor, Malaysia</div>
+      <h1>Nur Shamilla Selamat</h1>
+      <div><span class="tag">Senior Lecturer · Computer Science</span></div>
+      <p>I teach, research and build applied AI, from travel-safety analytics to apps for zero hunger, at Southern University College.</p>
+      <div class="actions">
+        <a class="cta" href="#publications">Publications</a>
+        <a class="ghost" href="#contact">Get in touch</a>
+      </div>
+      <div class="hint">Tip: click things in my office to jump to them</div>
+      <div class="scrollhint"><div class="mouse"></div>Scroll</div>
+    </div>
+
+    <div class="pins" id="pins"></div>
+
+    <div class="layer holo" id="lHolo">
+      <svg class="links" id="links" aria-hidden="true"></svg>
+      <div class="hcard hc1"><span class="k">// profile</span><h3>Nur Shamilla</h3>
+        <div>Faculty of Engineering &amp; IT<br>Southern University College<br>Skudai, Johor · Malaysia</div></div>
+      <div class="hcard hsum"><span class="k">// summary</span>
+        <p>Senior lecturer and Professional Technologist who builds applied AI with students, from travel-safety analytics to apps for zero hunger, and judges innovation competitions across Malaysia.</p>
+        <div class="stats" id="stats"></div></div>
+      <div class="hcard hc2"><span class="k">// roles</span><ul>
+        <li>Senior Lecturer, FEIT</li>
+        <li>PhD candidate (IT), UniKL MIIT</li>
+        <li>Professional Technologist (Ts.), MBOT</li>
+        <li>HRD Corp Accredited Trainer</li>
+        <li id="juryRole">Innovation jury</li></ul></div>
+      <div class="hcard hc3"><span class="k">// research interests</span><ul>
+        <li>Travel safety &amp; aspect-based sentiment analysis</li>
+        <li>Applied AI &amp; GPT systems for sustainability</li>
+        <li>Social media &amp; human-centred design</li>
+        <li>AI in education</li></ul></div>
+      <div class="counter" id="counter">000</div>
+    </div>
+  </div>
+</div>
+<div id="about" style="position:absolute;top:340vh"></div>
+
+<section class="block" id="publications">
+  <div class="wrap">
+    <div class="shead">
+      <div><span class="kicker">Research</span><h2>Publications</h2></div>
+      <p>Journal articles, conference proceedings, seminar papers and refereed presentations, newest first.</p>
+    </div>
+    <div class="chips" id="pubFilters"></div>
+    <div id="pubList"></div>
+  </div>
+</section>
+
+<section class="block" id="awards" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="shead">
+      <div><span class="kicker">Recognition</span><h2>Awards</h2></div>
+      <p>Medals from national and international innovation and research competitions, won with students and colleagues.</p>
+    </div>
+    <div class="medals" id="medals"></div>
+    <div class="awards" id="awardList"></div>
+  </div>
+</section>
+
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="shead">
+      <div><span class="kicker">Innovation</span><h2>Projects</h2></div>
+      <p>Research and innovation projects I've built with students and collaborators, with the awards and papers they produced.</p>
+    </div>
+    <div class="projects" id="projList"></div>
+  </div>
+</section>
+
+<section class="block" id="service" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="shead">
+      <div><span class="kicker">Service</span><h2>Jury &amp; credentials</h2></div>
+      <p>Competitions and conferences I've judged, and my professional certifications.</p>
+    </div>
+    <div class="cols">
+      <div><h3 class="subh">Jury appointments</h3><ul class="jury" id="juryList"></ul></div>
+      <div><h3 class="subh">Certifications</h3><div class="certs" id="certList"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="shead">
+      <div><span class="kicker">Say hello</span><h2>Let's connect</h2></div>
+      <p>Scan the code to open this portfolio or save my contact straight to your phone.</p>
+    </div>
+    <div class="contact">
+      <div class="lines">
+        <a class="cline" href="mailto:nurshamilla@sc.edu.my">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <div><small>Email</small>nurshamilla@sc.edu.my</div></a>
+        <a class="cline" href="https://my.linkedin.com/in/nur-shamilla-selamat" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>
+          <div><small>LinkedIn</small>linkedin.com/in/nur-shamilla-selamat</div></a>
+        <div class="cline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg>
+          <div><small>Office</small>Faculty of Engineering &amp; IT, Southern University College, Skudai, Johor</div></div>
+        <div class="cline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+          <div><small>Open to</small>Any research collaboration, competition jury, and postgraduate co-supervision.</div></div>
+      </div>
+      <div class="qrcard">
+        <div class="seg" id="seg1"><button data-mode="link" class="on">Portfolio link</button><button data-mode="vcard">Save contact</button></div>
+        <canvas id="qrMain" width="600" height="600" aria-label="QR code"></canvas>
+        <div class="qrcap" id="qrCap"></div>
+        <div class="qrbtns"><button class="primary" id="btnPresent">Present</button><button id="btnDownload">Download PNG</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><span>© <span id="yr"></span> Ts. Nur Shamilla Selamat</span><span>Built with three.js</span></footer>
+
+<div class="present" id="present" role="dialog" aria-modal="true" aria-label="QR code">
+  <button class="x" id="closePresent" aria-label="Close">×</button>
+  <h3>Nur Shamilla Selamat</h3>
+  <p>Senior Lecturer · Computer Science · Southern University College</p>
+  <canvas id="qrBig" width="900" height="900"></canvas>
+  <div class="seg" id="seg2"><button data-mode="link" class="on">Portfolio link</button><button data-mode="vcard">Save contact</button></div>
+  <p id="qrCap2"></p>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG: after you host the site (e.g. GitHub Pages), put its
+   public address here so the QR code always points to it.
+   ========================================================= */
+window.CONFIG = {
+  siteUrl: 'https://shmllslmt.github.io/',
+  name: 'Nur Shamilla Selamat',
+  title: 'Senior Lecturer',
+  email: 'nurshamilla@sc.edu.my',
+  linkedin: 'https://my.linkedin.com/in/nur-shamilla-selamat',
+  org: 'Southern University College',
+  dept: 'Faculty of Engineering and Information Technology'
+};
+
+/* Content. Projects point at awards and papers by their `k` key. */
+window.DATA = {
+pubs: [
+ {k:'tiktok-ijmoe',y:2026,type:'journal',t:'A data-centric study of aspect-based sentiment analysis for safety discourse in TikTok travel content',a:'Selamat, N. S., Che Mustapha, J., & Jaafar, J.',v:'International Journal of Modern Education (IJMOE), 8(29), 1277–1293',url:'https://doi.org/10.35631/IJMOE.829075'},
+ {k:'gendered-ijscwed',y:2026,type:'journal',t:'Mapping gendered safety in solo female travel: A scoping review of computational approaches and digital discourse',a:'Selamat, N. S., Che Mustapha, J., & Jaafar, J.',v:'International Journal for Studies on Children, Women, Elderly and Disabled, Vol. 26, 1–11'},
+ {k:'obd-sijml',y:2026,type:'journal',t:'A GPT-based applied computing system for interpretable OBD-II vehicle diagnostics and safe driving support',a:'Selamat, N. S., Wong, Y. H., Lee, B. F., & Quay, S. Y.',v:'Semarak International Journal of Machine Learning, 9(1), 55–69'},
+ {k:'tiktok-ivcosei',y:2026,type:'proceedings',t:'A data-centric study of aspect-based sentiment analysis for safety discourse on TikTok',a:'Selamat, N. S.',v:'Proceedings of the 5th International Virtual Conference on Social Sciences, Education and Innovation (5th IVCoSEI 2026), 439–452'},
+ {k:'seaim-talk',y:2026,type:'talk',t:'Bridging AI, gender, safety and tourism: A GSM-ABS conceptual framework for solo female travel safety discourse',a:'Selamat, N. S. · Refereed paper, presenter (Best Presenter)',v:'SeAIM’26, UiTM · 15–16 Sep 2026 · The Waterfront Hotel, Kuching, Sarawak'},
+ {k:'perkks-talk',y:2025,type:'talk',t:'Mapping gendered safety in solo female travel: A scoping review of computational approaches and digital discourse',a:'Selamat, N. S. · Refereed paper, presenter',v:'Persidangan Kependudukan Kebangsaan 2025 (PERKKS25) · 19–21 Nov 2025 · Eastin Hotel, Petaling Jaya, Selangor'},
+ {k:'perkks',y:2025,type:'proceedings',t:'Mapping gendered safety in solo female travel: A scoping review of computational approaches and digital discourse',a:'Selamat, N. S.',v:'Prosiding Persidangan Kependudukan Kebangsaan 2025 (PERKKS25), 191–214'},
+ {k:'ijares',y:2025,type:'journal',t:'Evaluating student perceptions of AI tools in multimedia editing and their impact on creativity and productivity',a:'Suhaimi, S. M., Mazlam, N. F., Selamat, N. S., Ismail, K., Quay, S. Y., & Nordin, N. D.',v:'International Journal of Advanced Research in Education and Society, 7(5), 468–482',url:'https://doi.org/10.55057/ijares.2025.7.5.38'},
+ {k:'altruism',y:2025,type:'journal',t:'Algorithmic altruism: Designing social media for zero hunger and responsible consumption',a:'Selamat, N. S., Cheng, X. Y., & Suhaimi, S.',v:'MeCAST Journal of Media, Communication & Society, Article 10 (IPPTAR)',url:'https://www.ipptar.gov.my/index.php/media1/ejurnal/ejurnal-2025/18-artikel-pilihan'},
+ {k:'ticketing',y:2025,type:'journal',t:'Enhancing institutional communication through an AI-powered ticketing system with real-time progress tracking',a:'Suhaimi, S., Foo, Y. X., Lwi, C. K., Teo, C. Y., Selamat, N. S., Lah, W. Y., & Ibus, S.',v:'MeCAST Journal of Media, Communication & Society, Article 4 (IPPTAR)',url:'https://www.ipptar.gov.my/index.php/media1/ejurnal/ejurnal-2025/18-artikel-pilihan'},
+ {k:'foodsnap',y:2025,type:'proceedings',t:'FoodSnap: AI-powered food discovery for sustainable living and zero hunger',a:'Selamat, N. S., Yi, C. X., & Suhaimi, S. M.',v:'APS Proceedings, Vol. 21, 87–93',url:'https://doi.org/10.5281/zenodo.16020464'},
+ {k:'flood',y:2025,type:'proceedings',t:'AI-driven flood prediction and mitigation system for sustainable cities: Integrating Google ML Kit and Gemini API for smart assistance',a:'Selamat, N. S., Xuan, T. C., & Mazlam, N. F.',v:'APS Proceedings, Vol. 21, 170–176',url:'https://doi.org/10.5281/zenodo.16022989'},
+ {k:'fashion-jiiicas',y:2025,type:'proceedings',t:'An AI and IoT-powered platform for sustainable fashion and community engagement',a:'Lee, L. H., Ismail, K., & Selamat, N. S.',v:'Proceedings of JIIICaS 2025, UiTM Pasir Gudang, 161–164'},
+ {k:'gap',y:2025,type:'proceedings',t:'Bridging the gap in education: A practical solution for enhancing educational efficiency',a:'Tan, Z. Y. D., Ismail, K., & Selamat, N. S.',v:'Proceedings of JIIICaS 2025, UiTM Pasir Gudang, 165–168'},
+ {k:'skillbridge',y:2025,type:'proceedings',t:'SkillBridge: AI-powered career matching platform for TVET graduates',a:'Suhaimi, S. M., Lee, Y. C., Wong, S. Q., Foo, K. T., Chang, C. K., & Selamat, N. S.',v:'APS Proceedings, Vol. 24, 58–63',url:'https://doi.org/10.5281/zenodo.16788456'},
+ {k:'fashion',y:2025,type:'proceedings',t:'An AI and IoT-powered platform for sustainable fashion and community engagement',a:'Lee, L. H., Derrick, Tan, Z. Y., Ismail, K., & Selamat, N. S.',v:'APS Proceedings, Vol. 24, 94–100',url:'https://doi.org/10.5281/zenodo.16971880'},
+ {k:'saas',y:2024,type:'proceedings',t:'SaaS-based unified platform for client management with integrated website builder and project life cycle management',a:'Poh, W. K., & Selamat, N. S.',v:'Innovating Today for a Sustainable Tomorrow, 41–45',url:'https://www.mnnfnetwork.com/uploads/4/6/9/3/46931833/innovating_today_for_a_sustainable_tomorrow.pdf#page=49'},
+ {k:'moodshelf',y:2024,type:'proceedings',t:'MoodShelf: Personal growth with mood tracking',a:'Lee, Y. F., Selamat, N. S., & Mazlam, N. F.',v:'Innovating Today for a Sustainable Tomorrow, 36–40',url:'https://www.mnnfnetwork.com/uploads/4/6/9/3/46931833/innovating_today_for_a_sustainable_tomorrow.pdf#page=44'},
+ {k:'smartresident',y:2024,type:'proceedings',t:'SmartResident: Resident management centre system',a:'Goh, Y. X. K., Mazlam, N. F., & Selamat, N. S.',v:'JIIICaS 2024, 103–107'},
+ {k:'socialmedia',y:2024,type:'proceedings',t:'An integrated social media management application',a:'Tan, B. Y., Tan, K. M., Leong, K. Y., & Selamat, N. S.',v:'International Final Year Project Competition and Exhibition (ICPEX 2023), 35–46, UniKL Publishing'},
+ {k:'pars19',y:2019,type:'seminar',t:'Establishing metadata of tourists’ online reviews',a:'Selamat, N. S., & Sim, A. T. H.',v:'14th Postgraduate Annual Research Seminar (PARS 2019), School of Computing, UTM'},
+ {k:'pars18',y:2018,type:'seminar',t:'A systematic literature review on tourists and their intentions to a destination towards excellence in digital tourism research',a:'Selamat, N. S., & Sim, A. T. H.',v:'13th Postgraduate Annual Research Seminar (PARS 2018), School of Computing, UTM'},
+ {k:'pacis',y:2017,type:'proceedings',t:'Transforming tourism destinations’ marketing strategies by understanding tourists’ satisfaction',a:'Selamat, N. S., Sim, A. T. H., & Hee, J. M.',v:'21st Pacific Asia Conference on Information Systems (PACIS 2017), 1–10',url:'https://aisel.aisnet.org/pacis2017/56'},
+ {k:'vroom',y:2016,type:'proceedings',t:'Vehicle registration and summons on the move (VROOM)',a:'Selamat, N. S., & Sim, A. T. H.',v:'UTM Computing Proceedings: Innovations in Computing Technology and Applications, 48–52'}
+],
+awards: [
+ {k:'seaim26',l:'special',lbl:'Best Presenter',s:'SeAIM’26',y:2026,e:'International Seminar on Advancing Innovation in AI, Education and Societal Transformation through Management and Engineering (SeAIM’26), UiTM · Kuching',p:'Bridging AI, Gender, Safety and Tourism: A GSM-ABS Conceptual Framework for Solo Female Travel Safety Discourse'},
+ {k:'diiid-vibeflow',l:'bronze',s:'DIIID 2026',y:2026,e:'7th Digitalised International Invention, Innovation & Design (DIIID) 2026, UiTM Johor',p:'VibeFlow: Unified Social Media Application with AI-Driven Content Moderation and AI-Info Detection'},
+ {k:'diiid-anime',l:'bronze',s:'DIIID 2026',y:2026,e:'7th Digitalised International Invention, Innovation & Design (DIIID) 2026, UiTM Johor',p:'An AI-Powered Anime Companion Application for Personalised Interaction, Wellbeing, and Language Learning'},
+ {k:'sirac',l:'silver',s:'SIRAC-MyCite IJ 2026',y:2026,e:'Semarak International Research Article Competition (SIRAC-MyCite IJ) 2026',p:'A GPT-Based Applied Computing System for Interpretable OBD-II Vehicle Diagnostics and Safe Driving Support'},
+ {k:'iciic-car',l:'silver',s:'ICIIC 2026',y:2026,e:'International Creative Innovation Idea Competition (ICIIC) 2026 · Professional',p:'SmartCarMate: Applying GPT and OBD Technology for Real-Time Human-Centred Vehicle Health Monitoring'},
+ {k:'iciic-uni',l:'silver',s:'ICIIC 2026',y:2026,e:'International Creative Innovation Idea Competition (ICIIC) 2026 · Professional',p:'UniScholar Nexus: Research and Collaboration Platform using GPT Technology'},
+ {k:'iciic-anime',l:'silver',s:'ICIIC 2026',y:2026,e:'International Creative Innovation Idea Competition (ICIIC) 2026 · Higher Institution Student',p:'AI-Powered Anime Interaction & Personalization for Inclusive Digital Culture (SDG 9 & SDG 11)'},
+ {k:'iniic25',l:'silver',s:'InIIC 2025',y:2025,e:'International Invention & Innovative Competition (InIIC) 2025',p:'Bridging Minds with an AI-Enhanced Platform for Secure and Efficient Research Collaboration'},
+ {k:'vic-food',l:'gold',s:'VIC 2025',y:2025,e:'Virtual Innovation Competition (VIC) 2025',p:'FoodSnap: AI-Powered Food Discovery for Sustainable Living and Zero Hunger'},
+ {k:'vic-flood',l:'gold',s:'VIC 2025',y:2025,e:'Virtual Innovation Competition (VIC) 2025',p:'AI-Driven Flood Prediction and Mitigation System for Sustainable Cities'},
+ {k:'i3dc-fashion',l:'silver',s:'i3DC 2025',y:2025,e:'International Invention, Innovation and Design Competition (i3DC) 2025',p:'An AI and IoT-Powered Platform for Sustainable Fashion and Community Engagement'},
+ {k:'i3dc-skill',l:'bronze',s:'i3DC 2025',y:2025,e:'International Invention, Innovation and Design Competition (i3DC) 2025',p:'SkillBridge: AI-Powered Career Matching Platform for TVET Graduates'},
+ {k:'jiiicas-fashion',l:'gold',s:'JIIICaS 2025',y:2025,e:'Johor International Innovation, Invention Competition and Symposium (JIIICaS) 2025',p:'An AI and IoT-Powered Platform for Sustainable Fashion and Community Engagement'},
+ {k:'jiiicas-gap',l:'bronze',s:'JIIICaS 2025',y:2025,e:'Johor International Innovation, Invention Competition and Symposium (JIIICaS) 2025',p:'Bridging the Gap in Education: A Practical Solution for Enhancing Educational Efficiency'},
+ {k:'irice-uni',l:'gold',s:'I-RICE 2025',y:2025,e:'International Research, Innovation, Creativity & Engineering Project Competition (I-RICE) 2025',p:'UniScholars Nexus: AI-Powered Academic Research and Collaboration Platform'},
+ {k:'irice-drive',l:'silver',s:'I-RICE 2025',y:2025,e:'International Research, Innovation, Creativity & Engineering Project Competition (I-RICE) 2025',p:'Real-Time Driving Assistant and Car Health Monitoring System for Everyday Drivers'},
+ {k:'irice-ticket',l:'silver',s:'I-RICE 2025',y:2025,e:'International Research, Innovation, Creativity & Engineering Project Competition (I-RICE) 2025',p:'Smart Ticketing System for Streamlined IT Operations in Universities'},
+ {k:'irice-blood',l:'bronze',s:'I-RICE 2025',y:2025,e:'International Research, Innovation, Creativity & Engineering Project Competition (I-RICE) 2025',p:'Predictive Blood Donation Ecosystem for Optimised Healthcare Resource Management'},
+ {k:'iniic-saas',l:'gold',s:'InIIC 2024',y:2024,e:'International Invention and Innovative Competition (InIIC) 2024',p:'SaaS-Based Unified Platform for Client Management with Integrated Website Builder & Project Life Cycle Management'},
+ {k:'iniic-mood',l:'gold',s:'InIIC 2024',y:2024,e:'International Invention and Innovative Competition (InIIC) 2024',p:'MoodShelf: Personal Growth with Mood Tracking'},
+ {k:'rice-ocean-sp',l:'special',lbl:'Outstanding Invention',s:'RICE 2024',y:2024,e:'Research, Innovation and Creativity Exhibition (RICE) 2024 · Special Award',p:'Ocean Odyssey: A Game-Based Learning Experience for Clean Oceans'},
+ {k:'rice-ocean',l:'gold',s:'RICE 2024',y:2024,e:'Research, Innovation and Creativity Exhibition (RICE) 2024',p:'Ocean Odyssey: A Game-Based Learning Experience for Clean Oceans'},
+ {k:'rice-resident',l:'silver',s:'RICE 2024',y:2024,e:'Research, Innovation and Creativity Exhibition (RICE) 2024',p:'SmartResident: Resident Management Centre System'},
+ {k:'rice-medical',l:'silver',s:'RICE 2024',y:2024,e:'Research, Innovation and Creativity Exhibition (RICE) 2024',p:'People’s Medical Service System'},
+ {k:'rice-flood',l:'silver',s:'RICE 2024',y:2024,e:'Research, Innovation and Creativity Exhibition (RICE) 2024',p:'Flood Prediction and Mitigation System for Safe and Sustainable Cities'},
+ {k:'rice-animal',l:'bronze',s:'RICE 2024',y:2024,e:'Research, Innovation and Creativity Exhibition (RICE) 2024',p:'A Location-Based Animal Rescue Platform Powered by Crowd-Sourcing'},
+ {k:'jiiicas-resident',l:'silver',s:'JIIICaS 2024',y:2024,e:'Johor International Innovation, Invention Competition and Symposium (JIIICaS) 2024',p:'SmartResident: Resident Management Mobile Application System'},
+ {k:'icpex',l:'silver',s:'I-CPEX 2023',y:2023,e:'International Final Year Project Competition and Exhibition (I-CPEX) 2023',p:'Integrated Social Media Management Web Application'}
+],
+projects: [
+ {n:'Solo Female Travel Safety',d:'Aspect-based sentiment analysis of TikTok travel content to map how women discuss safety, framed by my GSM-ABS conceptual framework.',tags:['NLP','ABSA','TikTok','Tourism'],aw:['seaim26'],pub:'tiktok-ijmoe'},
+ {n:'SmartCarMate',d:'GPT and OBD-II diagnostics that explain vehicle health in plain language and support safer everyday driving.',tags:['GPT','OBD-II','IoT'],aw:['sirac','iciic-car','irice-drive'],pub:'obd-sijml'},
+ {n:'FoodSnap',d:'AI-powered food discovery that nudges sustainable living and supports zero hunger.',tags:['AI','Mobile','SDG 2'],aw:['vic-food'],pub:'foodsnap'},
+ {n:'FloodGuard',d:'Flood prediction and smart assistance for sustainable cities using Google ML Kit and the Gemini API.',tags:['AI','Gemini API','Smart city'],aw:['vic-flood','rice-flood'],pub:'flood'},
+ {n:'Sustainable Fashion',d:'AI and IoT platform that connects communities around sustainable fashion.',tags:['AI','IoT','SDG 12'],aw:['jiiicas-fashion','i3dc-fashion'],pub:'fashion'},
+ {n:'UniScholars Nexus',d:'GPT-powered platform for academic research discovery and collaboration.',tags:['AI','GPT','Research'],aw:['irice-uni','iciic-uni']},
+ {n:'Anime Companion',d:'AI-powered anime companion for personalised interaction, wellbeing and language learning.',tags:['AI','Wellbeing','SDG 9 & 11'],aw:['iciic-anime','diiid-anime']},
+ {n:'VibeFlow',d:'Unified social media app with AI-driven content moderation and detection of AI-generated information.',tags:['AI','Moderation','Social media'],aw:['diiid-vibeflow']},
+ {n:'Bridging Minds',d:'AI-enhanced platform for secure and efficient research collaboration.',tags:['AI','Security','Research'],aw:['iniic25']},
+ {n:'SkillBridge',d:'AI career matching that connects TVET graduates with suitable jobs.',tags:['AI','Matching','TVET'],aw:['i3dc-skill'],pub:'skillbridge'},
+ {n:'Ocean Odyssey',d:'Game-based learning experience that teaches players about clean oceans.',tags:['Game','Education','SDG 14'],aw:['rice-ocean-sp','rice-ocean']},
+ {n:'Smart Ticketing',d:'AI-powered IT ticketing with real-time progress tracking for universities.',tags:['AI','Web','IT ops'],aw:['irice-ticket'],pub:'ticketing'},
+ {n:'MoodShelf',d:'Mood tracking app that supports personal growth and wellbeing.',tags:['Mobile','Wellbeing'],aw:['iniic-mood'],pub:'moodshelf'},
+ {n:'SaaS Client Hub',d:'Unified client management with an integrated website builder and project life cycle tools.',tags:['SaaS','Web'],aw:['iniic-saas'],pub:'saas'},
+ {n:'SmartResident',d:'Resident management centre system with a companion mobile application.',tags:['Mobile','Web','Community'],aw:['rice-resident','jiiicas-resident'],pub:'smartresident'},
+ {n:'LifeFlow',d:'Predictive blood donation ecosystem for optimised healthcare resource management.',tags:['Predictive','Health'],aw:['irice-blood']},
+ {n:'People’s Medical Service',d:'Medical service system that makes community healthcare easier to reach.',tags:['Health','Web'],aw:['rice-medical']},
+ {n:'Animal Rescue',d:'Location-based, crowd-sourced platform for rescuing animals in need.',tags:['Location','Crowdsourcing'],aw:['rice-animal']},
+ {n:'Bridging the Gap',d:'Practical solution for enhancing educational efficiency.',tags:['EdTech'],aw:['jiiicas-gap'],pub:'gap'},
+ {n:'Social Media Manager',d:'Integrated web application for managing social media accounts.',tags:['Web','Social media'],aw:['icpex'],pub:'socialmedia'}
+],
+certs: [
+ ['Professional Technologist (Ts.)','MBOT','2025'],
+ ['HRD Corp Accredited Trainer','HRD Corp','2024 – 2027'],
+ ['Train-The-Trainer','HRD Corp','2024'],
+ ['Azure AI Fundamentals','Microsoft','2023'],
+ ['Oracle Certified Associate','Oracle','2016']
+],
+jury: [
+ ['Jul 2026','Judge, International Innovation ARSVOT Malaysia 2026 (IAM2026)','Association for Researcher of Skills and Vocational Training · 4 projects evaluated'],
+ ['Jun 2026','Innovation Jury, Virtual Innovation Competition 2026 (VIC26)','DIGIT360 & Universiti Teknologi MARA'],
+ ['Apr 2026','Jury, International Conference on AI Smart Education, Baling e-Summit 2.0','Ministry of Education Malaysia'],
+ ['Oct 2025','Innovation Jury, Kuantan International Invention & Innovation Challenge 2025 (K3IC25)','Kolej Vokasional Kuantan & DIGIT360'],
+ ['Aug 2025','Jury, i-JaMCSIIX 2025','UiTM Jasin'],
+ ['Jul 2025','Innovation Jury, i3DC 2025','UiTM Kelantan'],
+ ['Jul 2025','Jury, i-JaMCSIIX Special Edition 2025','UiTM Jasin'],
+ ['Jun 2025','Innovation Jury, Virtual Innovation Competition (VIC) 2025','DIGIT360'],
+ ['May 2025','Innovation Jury, Malaysia Invention & Innovation Expo (MIIX) 2025','RRTechnology Solutions'],
+ ['Feb 2025','Jury, International Creative & Innovative Idea Competition (ICIIC) 2025','MNNF Network'],
+ ['Nov 2024','Innovation Jury, Malaysia Grand Invention Expo (MAGIEx) 2024','DIGIT360'],
+ ['Oct 2024','Jury, JIIICaS 2024','UiTM Pasir Gudang'],
+ ['Oct 2024','Jury, RICE 2024','FEIT, Southern University College']
+]
+};
+</script>
+
+<!-- ============ page content + QR ============ -->
+<script>
+(() => {
+const D = window.DATA, C = window.CONFIG;
+const $ = s => document.querySelector(s);
+const byKey = (list, k) => list.find(x => x.k === k);
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const medal = (lvl, size = 30) => lvl === 'special'
+  ? `<svg viewBox="0 0 32 32" width="${size}" height="${size}" aria-hidden="true"><path d="M10 2h5l3 9h-5z" fill="#FF9E9E"/><path d="M22 2h-5l-3 9h5z" fill="#4A2350"/><circle cx="16" cy="20" r="10" fill="var(--special)"/><path d="m16 13.5 2 4.1 4.5.6-3.3 3.1.8 4.5-4-2.2-4 2.2.8-4.5-3.3-3.1 4.5-.6z" fill="#fff"/></svg>`
+  : `<svg viewBox="0 0 32 32" width="${size}" height="${size}" aria-hidden="true"><path d="M10 2h5l3 9h-5z" fill="#FF9E9E"/><path d="M22 2h-5l-3 9h5z" fill="#4A2350"/><circle cx="16" cy="20" r="10" fill="var(--${lvl})"/><circle cx="16" cy="20" r="6.5" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/></svg>`;
+const lvlName = {gold:'Gold',silver:'Silver',bronze:'Bronze',special:'Special Award'};
+const awardName = a => a.lbl || lvlName[a.l];
+const typeName = {journal:'Journal',proceedings:'Proceedings',seminar:'Seminar',talk:'Presentation'};
+
+/* publications */
+const bold = a => a.replace(/Selamat, N\. S\./g, '<b>Selamat, N. S.</b>');
+let pubFilter = 'all';
+function renderPubs(){
+  const list = D.pubs.filter(p => pubFilter === 'all' || p.type === pubFilter);
+  const years = [...new Set(list.map(p => p.y))].sort((a,b) => b - a);
+  $('#pubList').innerHTML = years.map(y => `<div class="pubyear"><h3>${y}</h3><div class="pubs">${
+    list.filter(p => p.y === y).map(p => `<article class="pub"><span class="type ${p.type}">${typeName[p.type]}</span><h4>${p.t}</h4><div class="au">${bold(p.a)}</div><div class="venue">${p.v}</div>${p.url ? `<a class="link" href="${p.url}" target="_blank" rel="noopener">${p.url.includes('doi.org') ? 'DOI' : 'Read'} ↗</a>` : ''}</article>`).join('')
+  }</div></div>`).join('');
+}
+const fcount = t => D.pubs.filter(p => t === 'all' || p.type === t).length;
+$('#pubFilters').innerHTML = ['all','journal','proceedings','seminar','talk'].map(t =>
+  `<button class="chip${t === 'all' ? ' on' : ''}" data-f="${t}">${t === 'all' ? 'All' : t === 'talk' ? 'Presentations' : typeName[t]}<em>${fcount(t)}</em></button>`).join('');
+$('#pubFilters').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  pubFilter = b.dataset.f;
+  document.querySelectorAll('#pubFilters .chip').forEach(c => c.classList.toggle('on', c === b));
+  renderPubs();
+});
+renderPubs();
+
+/* awards */
+const counts = {gold:0,silver:0,bronze:0,special:0};
+D.awards.forEach(a => counts[a.l]++);
+$('#medals').innerHTML = ['gold','silver','bronze','special'].map(l =>
+  `<div class="mtile">${medal(l, 48)}<div><b>${counts[l]}</b><span>${l === 'special' ? 'Special' : lvlName[l]}</span></div></div>`).join('');
+const lvlColor = l => l === 'silver' ? 'var(--muted)' : `var(--${l})`;
+$('#awardList').innerHTML = D.awards.map(a =>
+  `<div class="award">${medal(a.l, 34)}<div><span class="lvl" style="color:${lvlColor(a.l)}">${awardName(a)} · ${a.y}</span><h4>${a.p}</h4><p>${a.e}</p></div></div>`).join('');
+
+/* projects */
+$('#projList').innerHTML = D.projects.map(p => {
+  const pub = p.pub ? byKey(D.pubs, p.pub) : null;
+  return `<article class="proj"><div class="body">
+    <h4>${p.n}</h4>
+    <p>${p.d}</p><div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+    <div class="wins">${p.aw.map(k => { const a = byKey(D.awards, k); return `<div>${medal(a.l, 20)}<span>${awardName(a)}, ${a.s}</span></div>`; }).join('')}
+    ${pub && pub.url ? `<a href="${pub.url}" target="_blank" rel="noopener">Read the paper ↗</a>` : pub ? `<a href="#publications">See publication ↑</a>` : ''}</div>
+  </div></article>`;
+}).join('');
+
+/* jury & certifications */
+$('#certList').innerHTML = D.certs.map(c => `<div class="cert"><div><b>${c[0]}</b> · ${c[1]}</div><span>${c[2]}</span></div>`).join('');
+$('#juryList').innerHTML = D.jury.map(j => `<li><span>${j[0]}</span><div>${j[1]}<small>${j[2]}</small></div></li>`).join('');
+
+/* hologram stats */
+const juryCount = D.jury.length;
+$('#juryRole').textContent = `Jury for ${juryCount} competitions & conferences`;
+const paperCount = D.pubs.filter(p => p.type !== 'talk').length;
+$('#stats').innerHTML = [[paperCount,'Papers'],[D.awards.length,'Awards'],[juryCount,'Jury roles'],[new Date().getFullYear() - 2019 + '+','Yrs teaching']]
+  .map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+
+/* ---------------- QR ---------------- */
+const isPreview = /claude|claudeusercontent|localhost|127\.0\.0\.1/.test(location.hostname) || !/^https?:/.test(location.protocol);
+const portfolioUrl = C.siteUrl || (isPreview ? '' : location.href.split('#')[0]);
+const vcard = ['BEGIN:VCARD','VERSION:3.0',`N:Selamat;Nur Shamilla;;Ts.;`,`FN:Ts. ${C.name}`,`ORG:${C.org};${C.dept}`,`TITLE:${C.title}`,
+  `EMAIL;TYPE=WORK:${C.email}`, portfolioUrl ? `URL:${portfolioUrl}` : '', `URL;TYPE=LinkedIn:${C.linkedin}`, 'END:VCARD'].filter(Boolean).join('\n');
+
+function qrMatrix(text){
+  if (qrcode.stringToBytesFuncs && qrcode.stringToBytesFuncs['UTF-8']) qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
+  const q = qrcode(0, 'M'); q.addData(text); q.make(); return q;
+}
+/* draws a QR with rounded data dots and solid finder eyes */
+function drawQR(canvas, text, {fg = '#2E1F2B', bg = '#ffffff', eye = '#C9506A', pad = 2} = {}){
+  const q = qrMatrix(text), n = q.getModuleCount(), ctx = canvas.getContext('2d');
+  const W = canvas.width, cell = W / (n + pad * 2);
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, canvas.height);
+  const inEye = (r, c) => (r < 7 && c < 7) || (r < 7 && c >= n - 7) || (r >= n - 7 && c < 7);
+  ctx.fillStyle = fg;
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+    if (!q.isDark(r, c) || inEye(r, c)) continue;
+    const x = (c + pad) * cell, y = (r + pad) * cell;
+    ctx.beginPath(); ctx.roundRect(x + cell * .06, y + cell * .06, cell * .88, cell * .88, cell * .3); ctx.fill();
+  }
+  [[0,0],[0,n-7],[n-7,0]].forEach(([r, c]) => {
+    const x = (c + pad) * cell, y = (r + pad) * cell;
+    ctx.fillStyle = fg; ctx.beginPath(); ctx.roundRect(x, y, cell * 7, cell * 7, cell * 1.8); ctx.fill();
+    ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(x + cell, y + cell, cell * 5, cell * 5, cell * 1.2); ctx.fill();
+    ctx.fillStyle = eye; ctx.beginPath(); ctx.roundRect(x + cell * 2, y + cell * 2, cell * 3, cell * 3, cell * .9); ctx.fill();
+  });
+}
+window.drawQR = drawQR;
+
+let mode = portfolioUrl ? 'link' : 'vcard';
+const payload = () => mode === 'link' && portfolioUrl ? portfolioUrl : vcard;
+window.qrPayload = () => portfolioUrl || vcard;
+function caption(){
+  if (mode === 'link' && !portfolioUrl) return 'Preview copy: the link QR turns on once the site is hosted and <code>siteUrl</code> is set. Showing your contact card instead.';
+  return mode === 'link' ? `Opens <b>${portfolioUrl.replace(/^https?:\/\//,'').replace(/\/$/,'')}</b>` : 'Adds my name, title, email and LinkedIn to your phone contacts';
+}
+function renderQR(){
+  drawQR($('#qrMain'), payload());
+  if ($('#present').classList.contains('open')) drawQR($('#qrBig'), payload());
+  $('#qrCap').innerHTML = caption(); $('#qrCap2').innerHTML = caption();
+  document.querySelectorAll('.seg button').forEach(b => b.classList.toggle('on', b.dataset.mode === mode));
+}
+document.querySelectorAll('.seg').forEach(s => s.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return; mode = b.dataset.mode; renderQR();
+}));
+const present = $('#present');
+function openPresent(){ present.classList.add('open'); renderQR(); $('#closePresent').focus(); }
+$('#openPresent').addEventListener('click', openPresent);
+$('#btnPresent').addEventListener('click', openPresent);
+$('#closePresent').addEventListener('click', () => present.classList.remove('open'));
+addEventListener('keydown', e => { if (e.key === 'Escape') present.classList.remove('open'); });
+
+$('#btnDownload').addEventListener('click', () => {
+  const W = 1000, H = 1240, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#FFC57D'); g.addColorStop(.5, '#FF9E9E'); g.addColorStop(1, '#FFAAC4');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.roundRect(60, 60, W - 120, H - 120, 48); ctx.fill();
+  const q = document.createElement('canvas'); q.width = q.height = 760; drawQR(q, payload());
+  ctx.drawImage(q, 120, 110);
+  ctx.fillStyle = '#2E1F2B'; ctx.textAlign = 'center';
+  ctx.font = '800 56px Outfit, sans-serif'; ctx.fillText('Nur Shamilla Selamat', W / 2, 960);
+  ctx.font = '500 30px "DM Sans", sans-serif'; ctx.fillStyle = '#76626C';
+  ctx.fillText('Senior Lecturer · Computer Science', W / 2, 1012);
+  ctx.fillText('Southern University College', W / 2, 1056);
+  ctx.font = '700 26px "JetBrains Mono", monospace'; ctx.fillStyle = '#C9506A';
+  ctx.fillText(mode === 'link' && portfolioUrl ? 'SCAN TO VIEW PORTFOLIO' : 'SCAN TO SAVE CONTACT', W / 2, 1120);
+  c.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `NurShamilla-QR-${mode}.png`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); });
+});
+if (window.self !== window.top) { $('#btnDownload').hidden = true; $('.qrbtns').style.gridTemplateColumns = '1fr'; }
+document.fonts.ready.then(renderQR); renderQR();
+})();
+</script>
+
+<!-- ============ three.js scene ============ -->
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas = document.getElementById('scene');
+const sticky = document.getElementById('sticky');
+const stage = document.getElementById('stage');
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.NeutralToneMapping;
+renderer.setClearColor(0x000000, 0);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
+
+/* ---------- palette ---------- */
+const C = { apricot: '#FFC57D', peach: '#FFB288', salmon: '#FF9E9E', lemon: '#FFF591', pink: '#FFAAC4', plum: '#4A2350', ink: '#3A1C46' };
+
+/* ---------- lights ---------- */
+scene.add(new THREE.HemisphereLight(0xfff1ec, 0xd9b9b0, 1.9));
+const sun = new THREE.DirectionalLight(0xfff6f0, 2.4);
+sun.position.set(5, 11, 9);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -7, right: 7, top: 7, bottom: -5, near: 1, far: 35 });
+sun.shadow.bias = -0.0004;
+sun.shadow.normalBias = 0.02;
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0xffd6d0, 0.6); fill.position.set(-8, 4, 3); scene.add(fill);
+
+/* ---------- helpers ---------- */
+const matCache = {};
+const M = (color, o = {}) => {
+  const key = color + JSON.stringify(o);
+  return matCache[key] ||= new THREE.MeshStandardMaterial({ color, roughness: 0.72, metalness: 0, ...o });
+};
+const rb = (w, h, d, r = 0.06) => new RoundedBoxGeometry(w, h, d, 4, Math.min(r, Math.min(w, h, d) / 2 - 0.002));
+function mesh(geo, mat, x = 0, y = 0, z = 0, parent = scene) {
+  const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z);
+  m.castShadow = m.receiveShadow = true; parent.add(m); return m;
+}
+function canvasTex(w, h, draw) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const ctx = c.getContext('2d'); draw(ctx, w, h);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  return { c, ctx, t, redraw(fn) { fn(ctx, w, h); t.needsUpdate = true; } };
+}
+const redrawOnFonts = [];
+function fontTex(w, h, draw) { const tex = canvasTex(w, h, draw); redrawOnFonts.push(() => tex.redraw(draw)); return tex; }
+let seed = 7; const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+const hotspots = [];
+function hot(group, section, label, anchor) { hotspots.push({ group, section, label, anchor, s: 0 }); group.traverse(o => o.userData.hot = hotspots.length - 1); }
+
+const room = new THREE.Group(); scene.add(room);
+
+/* shadow catcher */
+const catcher = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.ShadowMaterial({ opacity: 0.12 }));
+catcher.rotation.x = -Math.PI / 2; catcher.receiveShadow = true; room.add(catcher);
+
+/* ---------- rug: sunset rings ---------- */
+mesh(rb(7.6, 0.04, 5.4, 0.6), M(C.peach), 0.1, 0.02, 0.5, room);
+mesh(rb(6.2, 0.05, 4.2, 0.5), M(C.apricot), 0.1, 0.04, 0.5, room);
+mesh(rb(4.6, 0.06, 2.9, 0.4), M(C.salmon), 0.1, 0.06, 0.5, room);
+mesh(rb(3.0, 0.07, 1.7, 0.3), M(C.pink), 0.1, 0.08, 0.5, room);
+
+/* ---------- desk ---------- */
+const deskTopY = 1.45;
+mesh(rb(3.8, 0.14, 1.5, 0.07), M('#FFFAF6'), 0, deskTopY, -0.6, room);
+const legMat = M('#D9A86C');
+for (const [x, z] of [[-1.7, -1.2], [1.7, -1.2], [-1.7, 0.0], [1.7, 0.0]])
+  mesh(new THREE.CylinderGeometry(0.06, 0.05, deskTopY - 0.07, 16), legMat, x, (deskTopY - 0.07) / 2, z, room);
+
+/* ---------- monitors (projects) ---------- */
+const monitors = new THREE.Group(); monitors.position.set(0, 0, -1.0); room.add(monitors);
+const codeTex = canvasTex(640, 384, () => {});
+const dashTex = canvasTex(640, 384, () => {});
+function monitor(x, rotY, tex) {
+  const g = new THREE.Group(); g.position.set(x, 2.27, 0); g.rotation.y = rotY; monitors.add(g);
+  mesh(rb(1.62, 1.0, 0.09, 0.05), M('#3B3440'), 0, 0, 0, g);
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 0.88), new THREE.MeshBasicMaterial({ map: tex.t, toneMapped: false }));
+  scr.position.z = 0.047; g.add(scr);
+  mesh(new THREE.CylinderGeometry(0.05, 0.06, 0.45, 12), M('#3B3440'), 0, -0.68, -0.06, g);
+  mesh(rb(0.5, 0.04, 0.32, 0.02), M('#3B3440'), 0, -0.79, -0.04, g);
+}
+monitor(-0.86, 0.16, codeTex);
+monitor(0.86, -0.16, dashTex);
+hot(monitors, 'projects', 'Projects', new THREE.Vector3(0.86, 2.15, 0.2));
+
+/* code screen: lines type themselves out */
+const codeLines = [
+  ['// office.js', 'c'], ['class Lecturer {', 'k'], ['  name = "Nur Shamilla";', 's'], ['  field = "Computer Science";', 's'],
+  ['  research = ["Travel Safety", "ABSA",', 's'], ['              "Applied AI"];', 's'], ['', ''],
+  ['  teach(students) {', 'k'], ['    return students.map(s => s.inspire());', 'k'], ['  }', ''],
+  ['  publish(idea) {', 'k'], ['    return new Paper(idea).submit();', 'k'], ['  }', ''], ['}', '']
+];
+const codeColors = { k: '#FFB288', s: '#FFF591', c: '#A88BB3', '': '#F7DCE6' };
+let typed = 0;
+function drawCode(ctx, w, h) {
+  ctx.fillStyle = '#2A1A33'; ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = '#3A2546'; ctx.fillRect(0, 0, w, 34);
+  ['#FF9E9E', '#FFC57D', '#FFF591'].forEach((c, i) => { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(22 + i * 22, 17, 6, 0, 7); ctx.fill(); });
+  ctx.font = '500 19px "JetBrains Mono", monospace'; ctx.textBaseline = 'top';
+  let left = typed;
+  codeLines.forEach(([txt, kind], i) => {
+    if (left <= 0) return;
+    const shown = txt.slice(0, left); left -= txt.length + 1;
+    ctx.fillStyle = '#6E5478'; ctx.fillText(String(i + 1).padStart(2), 14, 46 + i * 23.5);
+    const parts = shown.split(/(".*?"|"[^"]*$)/);
+    let x = 52;
+    parts.forEach(p => { ctx.fillStyle = p.startsWith('"') ? codeColors.s : (kind === 'c' ? codeColors.c : (/^\s*(class|return|new|teach|publish)/.test(p) ? codeColors.k : codeColors[''])); ctx.fillText(p, x, 46 + i * 23.5); x += ctx.measureText(p).width; });
+    if (left <= 0 && Math.floor(performance.now() / 400) % 2) { ctx.fillStyle = '#FFAAC4'; ctx.fillRect(x + 2, 46 + i * 23.5, 10, 20); }
+  });
+}
+const totalChars = codeLines.reduce((n, l) => n + l[0].length + 1, 0);
+
+/* dashboard screen: research output per year */
+function drawDash(ctx, w, h) {
+  const D = window.DATA, pubs = D.pubs.filter(p => p.type !== 'talk');
+  ctx.fillStyle = '#FFFAF6'; ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = '#2E1F2B'; ctx.font = '700 28px Outfit, sans-serif'; ctx.textBaseline = 'top';
+  ctx.fillText('Research output', 28, 22);
+  ctx.font = '500 16px "DM Sans", sans-serif'; ctx.fillStyle = '#76626C';
+  ctx.fillText(`${pubs.length} papers · ${D.awards.length} awards`, 28, 58);
+  const years = [2016, 2017, 2018, 2019, 2023, 2024, 2025, 2026];
+  const byY = y => pubs.filter(p => p.y === y).length, aw = y => D.awards.filter(a => a.y === y).length;
+  const max = Math.max(...years.map(y => Math.max(byY(y), aw(y)))), bw = 26, gap = (w - 60) / years.length, base = h - 50;
+  years.forEach((y, i) => {
+    const x = 36 + i * gap, ph = (byY(y) / max) * 220, ah = (aw(y) / max) * 220;
+    ctx.fillStyle = '#7A3E6B'; ctx.beginPath(); ctx.roundRect(x, base - ph, bw, Math.max(ph, 3), 6); ctx.fill();
+    ctx.fillStyle = '#FF9E9E'; ctx.beginPath(); ctx.roundRect(x + bw + 3, base - ah, bw, Math.max(ah, 3), 6); ctx.fill();
+    ctx.fillStyle = '#76626C'; ctx.font = '600 15px "JetBrains Mono", monospace'; ctx.fillText(String(y).slice(2), x + 14, base + 12);
+  });
+  ctx.fillStyle = '#7A3E6B'; ctx.fillRect(w - 210, 30, 14, 14); ctx.fillStyle = '#FF9E9E'; ctx.fillRect(w - 110, 30, 14, 14);
+  ctx.fillStyle = '#2E1F2B'; ctx.font = '600 15px "DM Sans", sans-serif'; ctx.fillText('Papers', w - 190, 28); ctx.fillText('Awards', w - 90, 28);
+}
+codeTex.redraw(drawCode); dashTex.redraw(drawDash);
+
+/* desk props */
+mesh(rb(1.2, 0.05, 0.38, 0.02), M('#FFFFFF'), -0.05, deskTopY + 0.095, -0.15, room);
+mesh(rb(0.16, 0.05, 0.24, 0.025), M('#FFFFFF'), 0.8, deskTopY + 0.095, -0.12, room);
+const mug = new THREE.Group(); mug.position.set(1.45, deskTopY + 0.07, -0.35); room.add(mug);
+mesh(new THREE.CylinderGeometry(0.13, 0.12, 0.28, 24), M(C.salmon), 0, 0.14, 0, mug);
+mesh(new THREE.TorusGeometry(0.075, 0.025, 10, 20), M(C.salmon), 0.15, 0.15, 0, mug);
+mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.01, 20), M('#5A3A26'), 0, 0.27, 0, mug);
+const pens = new THREE.Group(); pens.position.set(-1.55, deskTopY + 0.07, -0.45); room.add(pens);
+mesh(new THREE.CylinderGeometry(0.12, 0.11, 0.3, 20), M('#FFFFFF'), 0, 0.15, 0, pens);
+[C.pink, C.plum, C.apricot].forEach((c, i) => {
+  const p = mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.5, 8), M(c), (i - 1) * 0.05, 0.38, (i % 2) * 0.04 - 0.02, pens);
+  p.rotation.z = (i - 1) * 0.18;
+});
+/* small cactus */
+const cactus = new THREE.Group(); cactus.position.set(1.62, deskTopY + 0.07, -1.05); room.add(cactus);
+mesh(new THREE.CylinderGeometry(0.13, 0.1, 0.18, 20), M(C.pink), 0, 0.09, 0, cactus);
+mesh(new THREE.CapsuleGeometry(0.07, 0.14, 6, 12), M('#6FA36B'), 0, 0.3, 0, cactus);
+mesh(new THREE.CapsuleGeometry(0.04, 0.06, 6, 10), M('#6FA36B'), 0.08, 0.32, 0, cactus).rotation.z = -0.6;
+
+/* ---------- chair ---------- */
+const chair = new THREE.Group(); chair.position.set(0, 0, 0.8); room.add(chair);
+const white = M('#FFF9F5'), chrome = M('#C8C3CC', { metalness: 0.5, roughness: 0.35 });
+mesh(rb(1.05, 0.14, 0.95, 0.07), white, 0, 0.98, 0, chair);
+mesh(rb(1.0, 1.05, 0.13, 0.06), white, 0, 1.62, 0.48, chair).rotation.x = -0.08;
+mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.72, 12), chrome, 0, 0.58, 0, chair);
+for (let i = 0; i < 5; i++) {
+  const a = (i / 5) * Math.PI * 2, leg = mesh(rb(0.07, 0.05, 0.6, 0.02), chrome, Math.sin(a) * 0.28, 0.22, Math.cos(a) * 0.28, chair);
+  leg.rotation.y = a;
+  mesh(new THREE.SphereGeometry(0.07, 12, 10), M('#4A3F4F'), Math.sin(a) * 0.56, 0.09, Math.cos(a) * 0.56, chair);
+}
+
+/* ---------- avatar: chibi lecturer in a black hijab, beige vest and ID lanyard ---------- */
+const AV = {
+  skin: M('#E6B48E'), black: M('#25202A', { roughness: 0.8 }), blackD: M('#25202A', { roughness: 0.8, side: THREE.DoubleSide }),
+  vest: M('#DCCBB0', { roughness: 0.9, side: THREE.DoubleSide }), shoe: M('#17141A'), white: M('#FFFFFF'),
+  iris: M('#3A2318'), brow: M('#2A1A14'), nose: M('#D9A07E'), lip: M('#B65A60'), lanyard: M(C.pink), badge: M(C.salmon),
+  cheek: M('#F29A93', { transparent: true, opacity: 0.5 })
+};
+const lathe = (pts, mat, parent, phiStart = 0, phiLength = Math.PI * 2) =>
+  mesh(new THREE.LatheGeometry(pts.map(([r, y]) => new THREE.Vector2(r, y)), 48, phiStart, phiLength), mat, 0, 0, 0, parent);
+function makeAvatar() {
+  const g = new THREE.Group();   /* origin at the hips */
+  lathe([[0, -0.14], [0.27, -0.12], [0.31, 0.02], [0.28, 0.28], [0.3, 0.52], [0.34, 0.7], [0.3, 0.8], [0.14, 0.86], [0, 0.88]], AV.black, g);
+  lathe([[0.315, -0.04], [0.33, 0.06], [0.3, 0.3], [0.32, 0.52], [0.355, 0.69], [0.322, 0.79]], AV.vest, g, 0.42, Math.PI * 2 - 0.84);   /* vest, open at the front */
+  lathe([[0.16, 1.07], [0.22, 1.0], [0.25, 0.92], [0.24, 0.86]], AV.blackD, g);   /* hijab wraps the neck only */
+  for (const s of [-1, 1]) mesh(new THREE.CylinderGeometry(0.011, 0.011, 0.36, 6), AV.lanyard, s * 0.07, 0.53, 0.305, g).rotation.z = s * 0.2;
+  mesh(rb(0.12, 0.16, 0.02, 0.01), AV.white, 0, 0.32, 0.305, g);
+  mesh(rb(0.055, 0.055, 0.01, 0.005), AV.badge, 0, 0.34, 0.317, g);
+
+  const head = new THREE.Group(); head.position.y = 1.36; g.add(head);
+  mesh(new THREE.SphereGeometry(0.5, 48, 36), AV.black, 0, 0.04, -0.02, head).scale.set(1, 1.05, 1);
+  mesh(new THREE.SphereGeometry(0.37, 48, 36), AV.skin, 0, -0.01, 0.17, head);
+  for (const s of [-1, 1]) {
+    mesh(new THREE.SphereGeometry(0.062, 18, 14), AV.white, s * 0.13, 0, 0.495, head).scale.set(1, 1.1, 0.5);
+    mesh(new THREE.SphereGeometry(0.046, 18, 14), AV.iris, s * 0.13, -0.005, 0.517, head).scale.z = 0.45;
+    mesh(new THREE.SphereGeometry(0.014, 8, 8), AV.white, s * 0.13 + 0.016, 0.022, 0.537, head);
+    mesh(rb(0.11, 0.022, 0.02, 0.008), AV.brow, s * 0.13, 0.105, 0.5, head).rotation.z = -s * 0.1;
+    const ch = mesh(new THREE.SphereGeometry(0.055, 12, 10), AV.cheek, s * 0.22, -0.09, 0.465, head); ch.scale.z = 0.3; ch.castShadow = false;
+  }
+  mesh(new THREE.SphereGeometry(0.03, 10, 8), AV.nose, 0, -0.065, 0.535, head);
+  mesh(new THREE.TorusGeometry(0.05, 0.012, 8, 16, Math.PI), AV.lip, 0, -0.13, 0.51, head).rotation.z = Math.PI;
+
+  const arms = [], legs = [];
+  for (const s of [-1, 1]) {
+    const arm = new THREE.Group(); arm.position.set(s * 0.37, 0.72, 0); g.add(arm);
+    mesh(new THREE.CapsuleGeometry(0.095, 0.26, 6, 14), AV.black, 0, -0.17, 0, arm);
+    const elbow = new THREE.Group(); elbow.position.y = -0.36; arm.add(elbow);
+    mesh(new THREE.CapsuleGeometry(0.085, 0.22, 6, 14), AV.black, 0, -0.14, 0, elbow);
+    mesh(new THREE.SphereGeometry(0.085, 16, 12), AV.skin, 0, -0.32, 0.01, elbow);
+    arms.push({ arm, elbow, s });
+
+    const hip = new THREE.Group(); hip.position.set(s * 0.15, -0.06, 0); g.add(hip);
+    mesh(new THREE.CylinderGeometry(0.155, 0.16, 0.48, 20), AV.black, 0, -0.22, 0, hip);
+    const knee = new THREE.Group(); knee.position.y = -0.46; hip.add(knee);
+    mesh(new THREE.CylinderGeometry(0.16, 0.178, 0.48, 20), AV.black, 0, -0.22, 0, knee);
+    mesh(rb(0.21, 0.12, 0.33, 0.055), AV.shoe, 0, -0.5, 0.05, knee);
+    legs.push({ hip, knee, s });
+  }
+  g.userData = { head, arms, legs };
+  return g;
+}
+/* blend between seated (0) and standing (1); `bend` tucks the knees and lifts the arms for a hop */
+const mix = (a, b, t) => a + (b - a) * t;
+function pose(av, stand, bend = 0, typing = 0) {
+  for (const { arm, elbow, s } of av.userData.arms) {
+    arm.rotation.set(mix(-0.75, 0, stand) - bend * 0.3, 0, s * (mix(0.08, 0.13, stand) + bend * 0.55));
+    elbow.rotation.x = mix(-0.75 + typing * s, -0.12, stand) - bend * 0.4;
+  }
+  for (const { hip, knee } of av.userData.legs) {
+    hip.rotation.x = mix(-Math.PI / 2, 0, stand) - bend * 0.55;
+    knee.rotation.x = mix(Math.PI / 2, 0, stand) + bend * 1.0;
+  }
+}
+
+/* ---------- bookshelf (publications) ---------- */
+const shelf = new THREE.Group(); shelf.position.set(-3.35, 0, -0.85); room.add(shelf);
+const wood = M('#EED8BC');
+for (const s of [-1, 1]) mesh(rb(0.08, 2.6, 0.6, 0.03), wood, s * 0.72, 1.3, 0, shelf);
+for (const y of [0.05, 0.92, 1.78, 2.6]) mesh(rb(1.52, 0.08, 0.6, 0.03), wood, 0, y, 0, shelf);
+mesh(rb(1.44, 2.56, 0.04, 0.015), M('#E2C6A6'), 0, 1.3, -0.28, shelf);
+const bookCols = [C.salmon, C.apricot, C.pink, C.peach, C.plum, '#7A3E6B', '#E07A8A', '#F2D16B', '#8E5A9B'];
+[0.09, 0.96, 1.82].forEach(base => {
+  let x = -0.64;
+  while (x < 0.56) {
+    const w = 0.07 + rand() * 0.07, h = 0.5 + rand() * 0.22;
+    if (rand() < 0.1 && x > -0.4) { x += 0.12; continue; }
+    const b = mesh(rb(w, h, 0.42, 0.012), M(bookCols[Math.floor(rand() * bookCols.length)]), x + w / 2, base + h / 2, 0.02, shelf);
+    if (rand() < 0.08) { b.rotation.z = -0.22; b.position.x += 0.05; x += 0.08; }
+    x += w + 0.008;
+  }
+});
+/* mortarboard on top */
+const cap = new THREE.Group(); cap.position.set(0.25, 2.64, 0.05); cap.rotation.y = 0.5; shelf.add(cap);
+mesh(new THREE.CylinderGeometry(0.19, 0.2, 0.15, 24), M('#2B2230'), 0, 0.08, 0, cap);
+mesh(rb(0.6, 0.04, 0.6, 0.015), M('#2B2230'), 0, 0.17, 0, cap);
+mesh(new THREE.SphereGeometry(0.03, 10, 8), M(C.pink), 0, 0.2, 0, cap);
+mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.3, 6), M(C.pink), 0.26, 0.04, 0.26, cap);
+mesh(new THREE.CylinderGeometry(0.03, 0.045, 0.1, 10), M(C.pink), 0.26, -0.13, 0.26, cap);
+hot(shelf, 'publications', 'Publications', new THREE.Vector3(0, 3.05, 0));
+
+/* ---------- plants ---------- */
+const sway = [];
+function bushyPlant(x, z, potColor, scale = 1) {
+  const p = new THREE.Group(); p.position.set(x, 0, z); p.scale.setScalar(scale); room.add(p);
+  mesh(new THREE.CylinderGeometry(0.32, 0.25, 0.6, 28), M(potColor), 0, 0.3, 0, p).receiveShadow = false;
+  mesh(new THREE.CylinderGeometry(0.29, 0.29, 0.02, 24), M('#5A3A26'), 0, 0.59, 0, p);
+  const leaves = new THREE.Group(); leaves.position.y = 0.6; p.add(leaves);
+  for (let i = 0; i < 9; i++) {
+    const a = (i / 9) * Math.PI * 2, l = mesh(new THREE.SphereGeometry(0.2, 16, 12), M(i % 2 ? '#5E9E5A' : '#79B86B'), Math.sin(a) * 0.18, 0.45 + (i % 3) * 0.22, Math.cos(a) * 0.18, leaves);
+    l.scale.set(0.55, 1.6, 0.3); l.rotation.set(Math.cos(a) * 0.5, a, -Math.sin(a) * 0.5);
+  }
+  sway.push(leaves); return p;
+}
+function snakePlant(x, z, potColor, parent = room, y = 0, scale = 1) {
+  const p = new THREE.Group(); p.position.set(x, y, z); p.scale.setScalar(scale); parent.add(p);
+  mesh(new THREE.CylinderGeometry(0.24, 0.2, 0.42, 24), M(potColor), 0, 0.21, 0, p);
+  const leaves = new THREE.Group(); leaves.position.y = 0.4; p.add(leaves);
+  for (let i = 0; i < 7; i++) {
+    const a = (i / 7) * Math.PI * 2, h = 0.7 + (i % 3) * 0.22;
+    const l = mesh(new THREE.CapsuleGeometry(0.07, h, 4, 10), M(i % 2 ? '#3F7D4E' : '#5C9B5E'), Math.sin(a) * 0.09, h / 2, Math.cos(a) * 0.09, leaves);
+    l.scale.set(1, 1, 0.3); l.rotation.set(Math.cos(a) * 0.18, a, -Math.sin(a) * 0.18);
+  }
+  sway.push(leaves); return p;
+}
+function trailingPlant(parent, x, y, z, potColor, drop = 0.9) {
+  const p = new THREE.Group(); p.position.set(x, y, z); parent.add(p);
+  mesh(new THREE.CylinderGeometry(0.15, 0.12, 0.2, 20), M(potColor), 0, 0.1, 0, p);
+  const leaves = new THREE.Group(); p.add(leaves);
+  for (let i = 0; i < 6; i++) mesh(new THREE.SphereGeometry(0.08, 10, 8), M(i % 2 ? '#5E9E5A' : '#79B86B'), Math.cos(i) * 0.1, 0.24, Math.sin(i) * 0.1, leaves).scale.set(1, 0.6, 1);
+  for (const side of [-1, 1]) for (let i = 0; i < 7; i++) {
+    const l = mesh(new THREE.SphereGeometry(0.065, 10, 8), M(i % 2 ? '#5E9E5A' : '#79B86B'), side * (0.15 + i * 0.012), 0.12 - i * drop / 7, 0.1 + (i % 2) * 0.04, leaves);
+    l.scale.set(0.6, 1, 0.35);
+  }
+  sway.push(leaves); return p;
+}
+bushyPlant(3.45, -1.25, '#FFFFFF');
+bushyPlant(-2.95, 0.75, C.pink, 0.7);
+snakePlant(-2.3, -0.3, C.salmon);
+snakePlant(-0.42, 0.05, C.apricot, shelf, 2.64, 0.45);
+
+/* ---------- certificate frames (credentials) ---------- */
+const frames = new THREE.Group(); frames.position.set(-3.35, 3.55, -1.25); room.add(frames);
+function certTex(title, sub) {
+  return fontTex(300, 400, (ctx, w, h) => {
+    ctx.fillStyle = '#FFFDF7'; ctx.fillRect(0, 0, w, h);
+    ctx.strokeStyle = '#E8B4A0'; ctx.lineWidth = 8; ctx.strokeRect(16, 16, w - 32, h - 32);
+    ctx.fillStyle = '#2E1F2B'; ctx.textAlign = 'center'; ctx.font = '800 44px Outfit, sans-serif'; ctx.fillText(title, w / 2, 120);
+    ctx.font = '500 20px "DM Sans", sans-serif'; ctx.fillStyle = '#76626C'; sub.split('|').forEach((l, i) => ctx.fillText(l, w / 2, 165 + i * 26));
+    ctx.fillStyle = '#C9506A'; ctx.beginPath(); ctx.arc(w / 2, 300, 38, 0, 7); ctx.fill();
+    ctx.fillStyle = '#FFC57D'; ctx.beginPath(); ctx.arc(w / 2, 300, 24, 0, 7); ctx.fill();
+  });
+}
+[[-0.36, 'HRD', 'Accredited|Trainer'], [0.36, 'Ts.', 'Professional|Technologist']].forEach(([x, t, s]) => {
+  mesh(rb(0.64, 0.84, 0.06, 0.03), M('#D3A877'), x, 0, 0, frames);
+  const art = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.68), new THREE.MeshStandardMaterial({ map: certTex(t, s).t, roughness: 0.9 }));
+  art.position.set(x, 0, 0.032); frames.add(art);
+});
+hot(frames, 'service', 'Credentials', new THREE.Vector3(0, 0.62, 0));
+
+/* ---------- trophy shelf (awards) ---------- */
+const trophies = new THREE.Group(); trophies.position.set(-1.0, 3.2, -1.2); room.add(trophies);
+mesh(rb(2.1, 0.09, 0.48, 0.03), M('#D9A86C'), 0, 0, 0, trophies);
+const metal = c => M(c, { metalness: 0.55, roughness: 0.3 });
+function cup(x, color, s = 1) {
+  const g = new THREE.Group(); g.position.set(x, 0.045, 0); g.scale.setScalar(s); trophies.add(g);
+  mesh(rb(0.28, 0.1, 0.28, 0.02), M('#3B3434'), 0, 0.05, 0, g);
+  const pts = [[0, 0], [0.11, 0], [0.11, 0.03], [0.05, 0.05], [0.035, 0.16], [0.05, 0.2], [0.15, 0.25], [0.19, 0.38], [0.2, 0.48], [0.17, 0.48], [0.15, 0.3], [0, 0.26]]
+    .map(([r, y]) => new THREE.Vector2(r, y));
+  mesh(new THREE.LatheGeometry(pts, 32), metal(color), 0, 0.1, 0, g);
+  for (const sx of [-1, 1]) mesh(new THREE.TorusGeometry(0.07, 0.018, 8, 16, Math.PI), metal(color), sx * 0.19, 0.48, 0, g).rotation.z = sx * -Math.PI / 2;
+  return g;
+}
+cup(-0.72, '#E3B23C', 1.25); cup(-0.28, '#C9CED6', 1.05); cup(0.12, '#C7864A', 0.95);
+const starShape = new THREE.Shape();
+for (let i = 0; i < 10; i++) { const r = i % 2 ? 0.08 : 0.18, a = (i / 10) * Math.PI * 2 + Math.PI / 2; i ? starShape.lineTo(Math.cos(a) * r, Math.sin(a) * r) : starShape.moveTo(Math.cos(a) * r, Math.sin(a) * r); }
+const star = new THREE.Group(); star.position.set(0.55, 0.045, 0); trophies.add(star);
+mesh(rb(0.24, 0.1, 0.24, 0.02), M('#3B3434'), 0, 0.05, 0, star);
+mesh(new THREE.CylinderGeometry(0.025, 0.03, 0.2, 10), metal('#E3B23C'), 0, 0.2, 0, star);
+const starMesh = mesh(new THREE.ExtrudeGeometry(starShape, { depth: 0.05, bevelEnabled: true, bevelSize: 0.015, bevelThickness: 0.015, bevelSegments: 2 }), M('#9B5DC8', { metalness: 0.3, roughness: 0.35 }), 0, 0.46, -0.025, star);
+const medal = new THREE.Group(); medal.position.set(0.88, -0.04, 0.2); trophies.add(medal);
+mesh(rb(0.06, 0.3, 0.01, 0.004), M(C.salmon), -0.035, -0.15, 0, medal).rotation.z = 0.2;
+mesh(rb(0.06, 0.3, 0.01, 0.004), M(C.plum), 0.035, -0.15, 0, medal).rotation.z = -0.2;
+mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.025, 24), metal('#E3B23C'), 0, -0.36, 0, medal).rotation.x = Math.PI / 2;
+hot(trophies, 'awards', 'Awards', new THREE.Vector3(0, 0.95, 0));
+
+/* ---------- corkboard with QR note (contact) ---------- */
+const board = new THREE.Group(); board.position.set(1.55, 3.5, -1.25); room.add(board);
+mesh(rb(2.25, 1.5, 0.1, 0.05), M('#E8CBA5'), 0, 0, 0, board);
+mesh(rb(2.05, 1.3, 0.04, 0.02), M('#B98C68', { roughness: 0.95 }), 0, 0, 0.04, board);
+function note(x, y, w, h, rot, tex) {
+  const n = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.9 }));
+  n.position.set(x, y, 0.07); n.rotation.z = rot; n.castShadow = true; board.add(n);
+  mesh(new THREE.SphereGeometry(0.045, 14, 12), M('#C9506A'), x + Math.sin(-rot) * h * 0.38, y + h * 0.38, 0.1, board);
+  return n;
+}
+const lineTex = (bg, ink) => canvasTex(200, 200, (ctx, w, h) => {
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = ink;
+  for (let i = 0; i < 6; i++) ctx.fillRect(22, 46 + i * 24, 80 + ((i * 37) % 80), 8);
+}).t;
+note(-0.66, 0.22, 0.46, 0.46, 0.08, lineTex(C.lemon, 'rgba(60,50,20,.35)'));
+note(-0.15, -0.2, 0.42, 0.42, -0.1, lineTex(C.pink, 'rgba(80,20,40,.35)'));
+note(-0.72, -0.34, 0.36, 0.36, -0.05, lineTex(C.peach, 'rgba(80,40,20,.35)'));
+const qrNote = canvasTex(400, 470, () => {});
+function drawQrNote() {
+  qrNote.redraw((ctx, w) => {
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, 470);
+    const q = document.createElement('canvas'); q.width = q.height = 340;
+    if (window.drawQR) window.drawQR(q, window.qrPayload(), { pad: 1 });
+    ctx.drawImage(q, 30, 24);
+    ctx.fillStyle = '#2E1F2B'; ctx.font = '800 40px Outfit, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('SCAN ME', w / 2, 425);
+  });
+}
+drawQrNote();
+note(0.5, 0.02, 0.62, 0.73, 0.04, qrNote.t);
+hot(board, 'contact', 'Scan me', new THREE.Vector3(0.5, -0.5, 0.15));
+
+/* ---------- mini fridge with travel magnets ---------- */
+const fridge = new THREE.Group(); fridge.position.set(2.6, 0, -0.95); room.add(fridge);
+mesh(rb(0.95, 1.45, 0.8, 0.1), M('#FFE3DA'), 0, 0.725, 0, fridge);
+mesh(rb(0.9, 0.015, 0.02, 0.006), M('#E8BFB3'), 0, 1.02, 0.4, fridge);
+mesh(rb(0.04, 0.5, 0.05, 0.02), chrome, -0.38, 0.62, 0.43, fridge);
+mesh(rb(0.04, 0.22, 0.05, 0.02), chrome, -0.38, 1.2, 0.43, fridge);
+const ink = '#3A1C46';
+const magnetArt = {
+  'KUALA LUMPUR': ctx => { ctx.fillStyle = ink; for (const x of [96, 142]) { ctx.fillRect(x, 50, 18, 80); ctx.beginPath(); ctx.moveTo(x, 50); ctx.lineTo(x + 9, 18); ctx.lineTo(x + 18, 50); ctx.fill(); } ctx.fillRect(114, 86, 28, 7); },
+  'KUCHING': ctx => { ctx.fillStyle = ink; ctx.beginPath(); ctx.arc(128, 86, 38, 0, 7); ctx.fill(); ctx.beginPath(); ctx.moveTo(94, 70); ctx.lineTo(98, 30); ctx.lineTo(124, 52); ctx.moveTo(162, 70); ctx.lineTo(158, 30); ctx.lineTo(132, 52); ctx.fill(); ctx.fillStyle = '#FFF591'; ctx.beginPath(); ctx.ellipse(114, 84, 6, 9, 0, 0, 7); ctx.ellipse(142, 84, 6, 9, 0, 0, 7); ctx.fill(); },
+  'LANGKAWI': ctx => { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(128, 20); ctx.lineTo(128, 100); ctx.lineTo(180, 100); ctx.fill(); ctx.fillStyle = ink; ctx.beginPath(); ctx.moveTo(80, 106); ctx.lineTo(180, 106); ctx.lineTo(166, 126); ctx.lineTo(94, 126); ctx.fill(); },
+  'MELAKA': ctx => { ctx.fillStyle = '#B23A48'; ctx.fillRect(100, 52, 56, 80); ctx.beginPath(); ctx.moveTo(94, 54); ctx.lineTo(128, 22); ctx.lineTo(162, 54); ctx.fill(); ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(128, 78, 14, 0, 7); ctx.fill(); ctx.fillStyle = ink; ctx.fillRect(127, 68, 3, 11); ctx.fillRect(127, 77, 9, 3); },
+  'SINGAPORE': ctx => { ctx.fillStyle = ink; for (const x of [84, 118, 152]) ctx.fillRect(x, 50, 22, 80); ctx.beginPath(); ctx.moveTo(70, 50); ctx.lineTo(186, 42); ctx.lineTo(190, 50); ctx.lineTo(74, 56); ctx.fill(); },
+  'BANGKOK': ctx => { ctx.fillStyle = ink; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(78 + i * 14, 130 - i * 26); ctx.lineTo(128, 70 - i * 26); ctx.lineTo(178 - i * 14, 130 - i * 26); ctx.fill(); } ctx.fillRect(126, 4, 4, 26); }
+};
+const magnetBg = [C.pink, C.apricot, '#BFE3F2', C.lemon, C.salmon, C.peach];
+Object.entries(magnetArt).forEach(([city, drawIcon], i) => {
+  const tex = fontTex(256, 192, (ctx, w, h) => {
+    ctx.fillStyle = magnetBg[i]; ctx.fillRect(0, 0, w, h);
+    drawIcon(ctx);
+    ctx.fillStyle = ink; ctx.font = '800 24px Outfit, sans-serif'; ctx.textAlign = 'center'; ctx.fillText(city, w / 2, 172);
+  });
+  const col = i % 2, row = Math.floor(i / 2);
+  const m = new THREE.Group(); m.position.set(-0.08 + col * 0.36 - 0.1, 1.24 - row * 0.32 - (row ? 0.08 : 0), 0.42); m.rotation.z = (rand() - 0.5) * 0.25; fridge.add(m);
+  mesh(rb(0.31, 0.24, 0.03, 0.012), M('#FFFFFF'), 0, 0, 0, m);
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(0.29, 0.22), new THREE.MeshStandardMaterial({ map: tex.t, roughness: 0.6 }));
+  face.position.z = 0.017; m.add(face);
+});
+trailingPlant(fridge, 0.15, 1.45, 0.05, C.pink, 0.8);
+
+/* ---------- hologram stage (about) ---------- */
+const HY = -14;   /* the stage sits below the office; the camera pans down to it */
+const holo = new THREE.Group(); holo.position.set(0, HY, 0); scene.add(holo);
+const glow = new THREE.Color(C.pink), warm = new THREE.Color(C.apricot);
+const grid = new THREE.GridHelper(36, 36, 0xFFAAC4, 0xFFAAC4);
+grid.material.transparent = true; grid.material.opacity = 0.16; holo.add(grid);
+mesh(new THREE.CylinderGeometry(1.55, 1.7, 0.3, 64), M('#4A2350', { emissive: '#3A1640', emissiveIntensity: 0.6 }), 0, 0.15, 0, holo);
+const ringTop = new THREE.Mesh(new THREE.CylinderGeometry(1.35, 1.35, 0.04, 64), new THREE.MeshBasicMaterial({ color: '#B0457A' }));
+ringTop.position.y = 0.31; holo.add(ringTop);
+const edge = new THREE.Mesh(new THREE.TorusGeometry(1.45, 0.022, 8, 96), new THREE.MeshBasicMaterial({ color: glow }));
+edge.rotation.x = Math.PI / 2; edge.position.y = 0.32; holo.add(edge);
+const beam = new THREE.Mesh(new THREE.CylinderGeometry(1.15, 1.4, 3.6, 48, 1, true),
+  new THREE.MeshBasicMaterial({ color: glow, transparent: true, opacity: 0.08, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }));
+beam.position.y = 2.1; holo.add(beam);
+const scanRings = [0, 1, 2].map(() => {
+  const r = new THREE.Mesh(new THREE.TorusGeometry(1.25, 0.012, 6, 80), new THREE.MeshBasicMaterial({ color: glow, transparent: true, opacity: 0.5 }));
+  r.rotation.x = Math.PI / 2; holo.add(r); return r;
+});
+const pCount = 160, pPos = new Float32Array(pCount * 3);
+for (let i = 0; i < pCount; i++) { const a = rand() * Math.PI * 2, r = rand() * 1.3; pPos.set([Math.cos(a) * r, rand() * 3.8, Math.sin(a) * r], i * 3); }
+const pGeo = new THREE.BufferGeometry(); pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: warm, size: 0.045, transparent: true, opacity: 0.85, depthWrite: false, blending: THREE.AdditiveBlending }));
+holo.add(particles);
+/* one avatar travels from the desk to the platform; it is drawn twice:
+   solid above the scan line and as a hologram below it */
+renderer.localClippingEnabled = true;
+const scanSolid = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), scanHolo = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
+const holoShader = new THREE.ShaderMaterial({
+  uniforms: { uColor: { value: new THREE.Color(C.pink) }, uTime: { value: 0 } },
+  vertexShader: `
+    #include <clipping_planes_pars_vertex>
+    varying vec3 vN; varying vec3 vView; varying vec3 vWorld;
+    void main() {
+      vec4 wp = modelMatrix * vec4(position, 1.0); vWorld = wp.xyz;
+      vec4 mvPosition = viewMatrix * wp;
+      vN = normalize(normalMatrix * normal); vView = normalize(-mvPosition.xyz);
+      gl_Position = projectionMatrix * mvPosition;
+      #include <clipping_planes_vertex>
+    }`,
+  fragmentShader: `
+    #include <clipping_planes_pars_fragment>
+    uniform vec3 uColor; uniform float uTime;
+    varying vec3 vN; varying vec3 vView; varying vec3 vWorld;
+    void main() {
+      #include <clipping_planes_fragment>
+      float fres = pow(1.0 - abs(dot(normalize(vN), normalize(vView))), 2.2);
+      float lines = smoothstep(0.18, 0.32, abs(fract(vWorld.y * 34.0 - uTime * 0.8) - 0.5));
+      float a = (0.16 + fres * 0.9) * mix(0.35, 1.0, lines);
+      gl_FragColor = vec4(uColor * (0.75 + fres * 1.3), a);
+    }`,
+  transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, clipping: true, clippingPlanes: [scanHolo]
+});
+const me = new THREE.Group(); scene.add(me);
+const solidMe = makeAvatar(), ghostMe = makeAvatar();
+solidMe.traverse(o => { if (o.isMesh) { o.material = o.material.clone(); o.material.clippingPlanes = [scanSolid]; } });
+ghostMe.traverse(o => { if (o.isMesh) { o.material = holoShader; o.castShadow = o.receiveShadow = false; } });
+me.add(solidMe, ghostMe);
+const scanRing = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.018, 8, 64), new THREE.MeshBasicMaterial({ color: '#FFE3EC', transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
+scanRing.rotation.x = Math.PI / 2; scanRing.scale.set(1, 0.7, 1); scene.add(scanRing);
+const scanDisc = new THREE.Mesh(new THREE.CircleGeometry(0.62, 48), new THREE.MeshBasicMaterial({ color: C.pink, transparent: true, opacity: 0.18, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }));
+scanDisc.rotation.x = -Math.PI / 2; scanDisc.scale.set(1, 0.7, 1); scene.add(scanDisc);
+const AV_BOTTOM = -1.08, AV_TOP = 1.95;
+/* where the avatar sits, where she lands after hopping off the chair, and the platform */
+const SEAT = new THREE.Vector3(0, 1.1, 0.72), SPOT = new THREE.Vector3(1.2, 0.97, 1.9);
+const holoLight = new THREE.PointLight(0xFFAAC4, 7, 6); holoLight.position.set(0, 0.8, 1.2); holo.add(holoLight);
+const holoKey = new THREE.PointLight(0xFFE6D8, 5, 7); holoKey.position.set(1.2, 2.6, 2.4); holo.add(holoKey);
+
+/* ---------- camera choreography ---------- */
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const lerpV = (a, b, t) => a.clone().lerp(b, t);
+const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const clamp01 = t => Math.min(1, Math.max(0, t));
+const seg = (p, a, b) => ease(clamp01((p - a) / (b - a)));
+let W = 1, H = 1, mobile = false;
+function keys() {
+  const k = Math.max(1, 1.25 / camera.aspect);
+  return {
+    p0: V(8.7 * k, 6.6 * k, 13.8 * k), t0: V(-0.4, 1.9, -0.2),
+    p1: V(0.3, HY + 2.3, mobile ? 11.5 : 8.6), t1: V(0, HY + 1.8, 0)
+  };
+}
+function resize() {
+  W = sticky.clientWidth; H = sticky.clientHeight; mobile = W < 860;
+  renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+/* ---------- interaction ---------- */
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(), parallax = new THREE.Vector2();
+let hovered = -1;
+const pinsEl = document.getElementById('pins');
+hotspots.forEach((h, i) => {
+  const b = document.createElement('button'); b.className = 'pin'; b.innerHTML = `<i></i>${h.label}`;
+  b.addEventListener('click', () => go(h.section));
+  b.addEventListener('mouseenter', () => hovered = i); b.addEventListener('mouseleave', () => hovered = -1);
+  pinsEl.appendChild(b); h.el = b;
+});
+function go(section) { document.getElementById(section).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
+function pick(e) {
+  const r = canvas.getBoundingClientRect();
+  mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(mouse, camera);
+  const hit = ray.intersectObjects(room.children, true).find(h => h.object.userData.hot !== undefined);
+  return hit && roomVisible ? hit.object.userData.hot : -1;
+}
+canvas.addEventListener('pointermove', e => {
+  const i = pick(e); parallax.copy(mouse);
+  if (e.pointerType !== 'mouse') return;
+  hovered = i; canvas.style.cursor = hovered >= 0 ? 'pointer' : '';
+});
+canvas.addEventListener('click', e => { const i = pick(e); if (i >= 0) go(hotspots[i].section); });
+
+/* ---------- loop ---------- */
+const lHero = document.getElementById('lHero'), lHolo = document.getElementById('lHolo'), panel = document.getElementById('roomPanel');
+const nav = document.getElementById('nav'), counter = document.getElementById('counter');
+/* info cards appear one by one as the scan climbs, each joined to a point on the avatar */
+const linksSvg = document.getElementById('links');
+const cards = [['.hc1', 0.06, V(0, 1.45, 0.1)], ['.hsum', 0.38, V(-0.42, 0.1, 0.1)], ['.hc2', 0.66, V(0.3, 0.55, 0.2)], ['.hc3', 0.92, V(0.2, -0.5, 0.1)]]
+  .map(([sel, at, local]) => ({ el: lHolo.querySelector(sel), at, local }));
+function drawLinks() {
+  const box = sticky.getBoundingClientRect();
+  let out = '';
+  for (const { el, local } of cards) {
+    if (!el.offsetParent || !el.classList.contains('on')) continue;
+    tmp.copy(local); solidMe.localToWorld(tmp); tmp.project(camera);
+    const ax = (tmp.x * 0.5 + 0.5) * W, ay = (-tmp.y * 0.5 + 0.5) * H;
+    const r = el.getBoundingClientRect(), left = r.left - box.left, right = r.right - box.left, cy = r.top - box.top + r.height / 2;
+    if (ax > left && ax < right) continue;
+    const cx = ax > right ? right : left;
+    out += `<path d="M${cx} ${cy}H${(cx + ax) / 2}L${ax} ${ay}"/><circle cx="${ax}" cy="${ay}" r="4.5"/>`;
+  }
+  linksSvg.innerHTML = out;
+}
+let pSmooth = 0, roomVisible = true, lastType = 0;
+const clock = new THREE.Clock();
+const tmp = new THREE.Vector3();
+const PLAT = new THREE.Vector3(0, HY + 1.42, 0);
+
+function frame() {
+  requestAnimationFrame(frame);
+  const r = stage.getBoundingClientRect();
+  const pTarget = clamp01(-r.top / (r.height - innerHeight));
+  pSmooth += (pTarget - pSmooth) * (reduce ? 1 : 0.09);
+  const p = pSmooth;
+  nav.classList.toggle('dark', pTarget > 0.33 && r.bottom > 80);
+  if (r.bottom <= 0) return;
+
+  const t = clock.getElapsedTime();
+
+  /* 1. stand up and hop off the chair  2. camera pans down while she drops to the stage  3. scan */
+  const u = seg(p, 0.05, 0.17), pan = seg(p, 0.19, 0.48), fall = seg(p, 0.21, 0.5), prog = clamp01((p - 0.55) / 0.3);
+  const K = keys();
+  const pos = lerpV(K.p0, K.p1, pan), tgt = lerpV(K.t0, K.t1, pan);
+  const par = reduce ? 0 : 1 - pan * 0.6;
+  pos.x += parallax.x * 0.35 * par; pos.y += parallax.y * 0.2 * par;
+  camera.position.copy(pos); camera.lookAt(tgt);
+  const heroW = 1 - pan;
+  const sx = mobile ? 0 : W * 0.2 * heroW, sy = mobile ? H * (0.25 + 0.22 * clamp01((camera.aspect - 0.5) / 0.45)) * heroW : 0;
+  camera.setViewOffset(W, H, -sx, -sy, W, H);
+  holo.visible = pan > 0.02;
+
+  /* avatar path */
+  const yawCam = Math.atan2(K.p0.x, K.p0.z);
+  const at = lerpV(lerpV(SEAT, SPOT, u), PLAT, fall);
+  at.y += Math.sin(u * Math.PI) * 0.7 + Math.sin(fall * Math.PI) * 1.2;
+  me.position.copy(at);
+  const settle = clamp01((p - 0.5) / 0.06);
+  me.rotation.y = mix(mix(Math.PI, yawCam, u), 0, fall) + (reduce ? 0 : Math.sin(t * 0.45) * 0.45 * settle);
+  me.scale.setScalar(mix(0.9, 1, fall));
+  const typing = u === 0 && !reduce ? Math.sin(t * 12) * 0.06 : 0;
+  const bend = Math.sin(u * Math.PI) * 0.8 + Math.sin(fall * Math.PI) * 0.6;
+  pose(solidMe, u, bend, typing); pose(ghostMe, u, bend, typing);
+  if (!reduce) solidMe.userData.head.rotation.z = ghostMe.userData.head.rotation.z = Math.sin(t * 0.85) * 0.05;
+
+  /* cream office panel slides up with the room, uncovering the stage */
+  tmp.set(0, -2.4, 3.2).project(camera);
+  const panelBottom = Math.min(H + 60, (-tmp.y * 0.5 + 0.5) * H);
+  panel.style.transform = `translateY(${Math.min(0, panelBottom - H - 60)}px)`;
+
+  /* overlays */
+  lHero.style.opacity = 1 - clamp01(p / 0.1);
+  lHero.style.visibility = p > 0.12 ? 'hidden' : 'visible';
+  const pinVis = mobile ? 0 : 1 - clamp01(p / 0.05);
+  roomVisible = p < 0.08;
+  const holoVis = clamp01((p - 0.52) / 0.04);
+  lHolo.style.opacity = holoVis;
+  lHolo.style.visibility = holoVis > 0.01 ? 'visible' : 'hidden';
+  for (const c of cards) c.el.classList.toggle('on', prog >= c.at);
+
+  /* animate */
+  if (!reduce) {
+    if (t - lastType > 0.06) { lastType = t; typed = (typed + 1) % (totalChars + 40); codeTex.redraw(drawCode); }
+    sway.forEach((l, i) => l.rotation.z = Math.sin(t * 1.1 + i) * 0.03);
+    starMesh.rotation.y = t * 0.8;
+    medal.rotation.z = Math.sin(t * 1.4) * 0.06;
+    holoShader.uniforms.uTime.value = t;
+    scanRings.forEach((ring, i) => { const k = ((t * 0.35 + i / 3) % 1); ring.position.y = 0.35 + k * 3.4; ring.material.opacity = 0.55 * (1 - k); });
+    const arr = pGeo.attributes.position.array;
+    for (let i = 0; i < pCount; i++) { arr[i * 3 + 1] += 0.006 + (i % 5) * 0.001; if (arr[i * 3 + 1] > 3.9) arr[i * 3 + 1] = 0.3; }
+    pGeo.attributes.position.needsUpdate = true;
+  } else if (typed === 0) { typed = totalChars; codeTex.redraw(drawCode); }
+
+  hotspots.forEach((h, i) => {
+    h.s += ((i === hovered ? 1 : 0) - h.s) * 0.18;
+    h.group.scale.setScalar(1 + h.s * 0.04);
+    tmp.copy(h.anchor).add(h.group.position).project(camera);
+    const x = (tmp.x * 0.5 + 0.5) * W, y = (-tmp.y * 0.5 + 0.5) * H;
+    h.el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -100%)`;
+    h.el.style.opacity = Math.max(pinVis * 0.92, h.s * pinVis);
+    h.el.style.pointerEvents = pinVis > 0.3 ? 'auto' : 'none';
+    h.el.classList.toggle('hot', i === hovered);
+  });
+
+  /* scan sweeps up from the feet: solid avatar becomes a hologram */
+  const sc = me.scale.y;
+  const scanY = me.position.y + (AV_BOTTOM - 0.05) * sc + prog * (AV_TOP - AV_BOTTOM + 0.12) * sc;
+  scanSolid.constant = -scanY; scanHolo.constant = scanY;
+  scanRing.position.set(me.position.x, scanY, me.position.z); scanDisc.position.copy(scanRing.position);
+  scanRing.visible = scanDisc.visible = prog > 0.005 && prog < 0.995;
+  tmp.set(0, HY + 0.15, 1.7).project(camera);
+  counter.style.transform = `translate(${(tmp.x * 0.5 + 0.5) * W}px, ${(-tmp.y * 0.5 + 0.5) * H}px) translate(-50%, -50%)`;
+  counter.textContent = String(Math.round(prog * 100)).padStart(3, '0');
+  if (holoVis > 0.01) drawLinks();
+
+  renderer.render(scene, camera);
+}
+
+/* pill links that point into the 3D stage */
+document.querySelectorAll('[data-stage]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  const top = stage.offsetTop + (stage.offsetHeight - innerHeight) * parseFloat(a.dataset.stage);
+  scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+}));
+
+document.fonts.ready.then(() => { codeTex.redraw(drawCode); dashTex.redraw(drawDash); redrawOnFonts.forEach(f => f()); drawQrNote(); });
+frame();
+const hideLoader = () => document.getElementById('loader').classList.add('gone');
+requestAnimationFrame(() => requestAnimationFrame(hideLoader)); setTimeout(hideLoader, 1500);
+</script>
+</body>
+</html>
