@@ -1,30 +1,25 @@
-# Nur Shamilla Selamat — 3D portfolio
+Nur Shamilla Selamat Academic Portfolio
 
-A single-file site (`index.html`) built with three.js. No build step.
+Lecturer in Information Technology · Artificial Intelligence · Innovation · Sustainable Digital Futures
 
-## Live site
+Nur Shamilla Selamat is a lecturer in the Faculty of Engineering and Information Technology (FEIT) whose teaching, research, and innovation work connects information technology with practical challenges in education, sustainability, digital communities, and everyday life.
 
-https://shmllslmt.github.io/ (GitHub Pages, from the `main` branch of `shmllslmt/shmllslmt.github.io`).
+Her academic portfolio brings together research publications, conference presentations, innovation awards, professional certifications, jury appointments, and applied computing projects. Her work spans artificial intelligence, AI in education, IoT, software engineering, digital tourism, social computing, mobile applications, game-based learning, sustainable technology, and academic research systems.
 
-`siteUrl` in the `CONFIG` block of `index.html` is set to that address, so the QR code's "Portfolio link" mode opens it. "Save contact" mode adds your name, title, email and LinkedIn to the scanner's phone.
+Research and academic interests
 
-To publish a change, commit and push to `main`; the site updates within a minute or two.
+Nur Shamilla’s research and teaching interests include:
 
-## Updating content
+• Artificial intelligence and responsible innovation
+• AI tools in education and multimedia learning
+• Information technology and software systems
+• Digital tourism and online consumer behaviour
+• Social computing and algorithmic altruism
+• Sustainable cities, food systems, and community technology
+• Academic research collaboration platforms
+• Game-based learning and educational technology
+• Mobile application and database systems
+• Academic programme governance, quality assurance, and accreditation
 
-Everything is in the `window.DATA` block in `index.html`:
+Keywords: Nur Shamilla Selamat, lecturer in information technology, computer science lecturer, artificial intelligence research, AI in education, software engineering, IoT innovation, digital tourism research, sustainable technology, academic portfolio, Malaysian researcher, FEIT lecturer, Three.js portfolio, innovation awards, research publications, educational technology, mobile application development.
 
-- `pubs`: papers and presentations (`type` is `journal`, `proceedings`, `seminar` or `talk`)
-- `awards`: `l` is `gold`, `silver`, `bronze` or `special`; `s` is the short name shown on project cards
-- `projects`: `aw` lists award keys (`k`) and `pub` is a paper key
-- `certs`, `jury`
-
-Counts in the 3D scene (papers, awards, jury roles) update on their own.
-
-## Preview locally
-
-```bash
-python3 -m http.server 5173
-```
-
-Then open http://localhost:5173.
