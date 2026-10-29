@@ -659,34 +659,8 @@ const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true 
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-// const isMobile = matchMedia('(max-width: 860px)').matches;
-
-// const renderer = new THREE.WebGLRenderer({
-//   canvas,
-//   antialias: !isMobile,
-//   alpha: true
-// });
-
-// renderer.setPixelRatio(
-//   Math.min(devicePixelRatio, isMobile ? 1 : 1.35)
-// );
-
-// renderer.shadowMap.enabled = !isMobile;
-
-// if (!isMobile) {
-//   renderer.shadowMap.type = THREE.PCFShadowMap;
-// }
-
 renderer.toneMapping = THREE.NeutralToneMapping;
 renderer.setClearColor(0x000000, 0);
-
-requestAnimationFrame(() => {
-  document.getElementById('loader')?.classList.add('gone');
-
-  setTimeout(() => {
-    initThreeScene();
-  }, 50);
-});
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
