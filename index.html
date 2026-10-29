@@ -173,19 +173,10 @@ section.block{padding:120px 7vw;position:relative}
 .award p{margin:0;font-size:13.5px;color:var(--muted)}
 @media (max-width:860px){.awards{grid-template-columns:1fr}}
 
-.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.proj{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--salmon);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
-.proj:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(46,31,43,.09)}
-.proj .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
-.proj h4{margin:0;font:700 18px/1.25 var(--display)}
-.proj p{margin:0;font-size:14px;color:var(--muted)}
 .tags{display:flex;gap:6px;flex-wrap:wrap}
 .tags span{font:700 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--bg2);padding:6px 8px;border-radius:6px}
 .wins{margin-top:auto;display:flex;flex-direction:column;gap:6px;padding-top:8px;border-top:1px dashed var(--line)}
 .wins div{display:flex;align-items:center;gap:8px;font-size:13px}
-.proj a{font:700 12px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--rose);text-decoration:none}
-@media (max-width:1000px){.projects{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:640px){.projects{grid-template-columns:1fr}}
 
 .cols{display:grid;grid-template-columns:1.3fr 1fr;gap:48px}
 .cols>*{min-width:0}
@@ -246,7 +237,6 @@ footer{padding:28px 7vw;display:flex;justify-content:space-between;gap:16px;flex
     <a href="#about" data-stage="0.95">About</a>
     <a href="#publications">Publications</a>
     <a href="#awards">Awards</a>
-    <a href="#projects">Projects</a>
     <a href="#service">Jury</a>
     <a href="#contact">Contact</a>
   </div>
@@ -317,17 +307,7 @@ footer{padding:28px 7vw;display:flex;justify-content:space-between;gap:16px;flex
   </div>
 </section>
 
-<section class="block" id="projects">
-  <div class="wrap">
-    <div class="shead">
-      <div><span class="kicker">Innovation</span><h2>Projects</h2></div>
-      <p>Research and innovation projects I've built with students and collaborators, with the awards and papers they produced.</p>
-    </div>
-    <div class="projects" id="projList"></div>
-  </div>
-</section>
-
-<section class="block" id="service" style="background:var(--bg2)">
+<section class="block" id="service">
   <div class="wrap">
     <div class="shead">
       <div><span class="kicker">Service</span><h2>Jury &amp; credentials</h2></div>
@@ -388,7 +368,7 @@ footer{padding:28px 7vw;display:flex;justify-content:space-between;gap:16px;flex
    public address here so the QR code always points to it.
    ========================================================= */
 window.CONFIG = {
-  siteUrl: 'https://shmllslmt.github.io/',
+  siteUrl: 'https://shamillaportfolio.vercel.app/',
   name: 'Nur Shamilla Selamat',
   title: 'Senior Lecturer',
   email: 'nurshamilla@sc.edu.my',
@@ -404,9 +384,8 @@ pubs: [
  {k:'gendered-ijscwed',y:2026,type:'journal',t:'Mapping gendered safety in solo female travel: A scoping review of computational approaches and digital discourse',a:'Selamat, N. S., Che Mustapha, J., & Jaafar, J.',v:'International Journal for Studies on Children, Women, Elderly and Disabled, Vol. 26, 1–11', url:'https://ijcwed.com/issue/international-journal-for-studies-on-children-women-elderly-and-persons-with-disabilities-vol-26-march-2026/'},
  {k:'obd-sijml',y:2026,type:'journal',t:'A GPT-based applied computing system for interpretable OBD-II vehicle diagnostics and safe driving support',a:'Selamat, N. S., Wong, Y. H., Lee, B. F., & Quay, S. Y.',v:'Semarak International Journal of Machine Learning, 9(1), 55–69', url:'https://sijml.com/index.php/journal/article/view/37'},
  {k:'tiktok-ivcosei',y:2026,type:'proceedings',t:'A data-centric study of aspect-based sentiment analysis for safety discourse on TikTok',a:'Selamat, N. S.',v:'Proceedings of the 5th International Virtual Conference on Social Sciences, Education and Innovation (5th IVCoSEI 2026), 439–452'},
- {k:'seaim-talk',y:2026,type:'talk',t:'Bridging AI, gender, safety and tourism: A GSM-ABS conceptual framework for solo female travel safety discourse',a:'Selamat, N. S. · Refereed paper, presenter (Best Presenter)',v:'SeAIM’26, UiTM · 15–16 Sep 2026 · The Waterfront Hotel, Kuching, Sarawak'},
- {k:'perkks-talk',y:2025,type:'talk',t:'Mapping gendered safety in solo female travel: A scoping review of computational approaches and digital discourse',a:'Selamat, N. S. · Refereed paper, presenter',v:'Persidangan Kependudukan Kebangsaan 2025 (PERKKS25) · 19–21 Nov 2025 · Eastin Hotel, Petaling Jaya, Selangor'},
- {k:'perkks',y:2025,type:'proceedings',t:'Mapping gendered safety in solo female travel: A scoping review of computational approaches and digital discourse',a:'Selamat, N. S.',v:'Prosiding Persidangan Kependudukan Kebangsaan 2025 (PERKKS25), 191–214'},
+ {k:'seaim-talk',y:2026,type:'talk',t:'Bridging AI, gender, safety and tourism: A GSM-ABSA conceptual framework for solo female travel safety discourse',a:'Selamat, N. S. · Refereed paper, presenter (Best Presenter)',v:'SeAIM’26, UiTM · 15–16 Sep 2026 · The Waterfront Hotel, Kuching, Sarawak'},
+ {k:'perkks',y:2025,type:'proceedings',t:'Mapping gendered safety in solo female travel: A scoping review of computational approaches and digital discourse',a:'Selamat, N. S. · Refereed paper, presenter',v:'Prosiding Persidangan Kependudukan Kebangsaan 2025 (PERKKS25), 191–214 · 19–21 Nov 2025 · Eastin Hotel, Petaling Jaya, Selangor'},
  {k:'ijares',y:2025,type:'journal',t:'Evaluating student perceptions of AI tools in multimedia editing and their impact on creativity and productivity',a:'Suhaimi, S. M., Mazlam, N. F., Selamat, N. S., Ismail, K., Quay, S. Y., & Nordin, N. D.',v:'International Journal of Advanced Research in Education and Society, 7(5), 468–482'},
  {k:'altruism',y:2025,type:'journal',t:'Algorithmic altruism: Designing social media for zero hunger and responsible consumption',a:'Selamat, N. S., Cheng, X. Y., & Suhaimi, S.',v:'MeCAST Journal of Media, Communication & Society, Article 10 (IPPTAR)',url:'https://www.ipptar.gov.my/index.php/media1/ejurnal/ejurnal-2025/18-artikel-pilihan'},
  {k:'ticketing',y:2025,type:'journal',t:'Enhancing institutional communication through an AI-powered ticketing system with real-time progress tracking',a:'Suhaimi, S., Foo, Y. X., Lwi, C. K., Teo, C. Y., Selamat, N. S., Lah, W. Y., & Ibus, S.',v:'MeCAST Journal of Media, Communication & Society, Article 4 (IPPTAR)',url:'https://www.ipptar.gov.my/index.php/media1/ejurnal/ejurnal-2025/18-artikel-pilihan'},
@@ -454,28 +433,6 @@ awards: [
  {k:'rice-animal',l:'bronze',s:'RICE 2024',y:2024,e:'Research, Innovation and Creativity Exhibition (RICE) 2024',p:'A Location-Based Animal Rescue Platform Powered by Crowd-Sourcing'},
  {k:'jiiicas-resident',l:'silver',s:'JIIICaS 2024',y:2024,e:'Johor International Innovation, Invention Competition and Symposium (JIIICaS) 2024',p:'SmartResident: Resident Management Mobile Application System'},
  {k:'icpex',l:'silver',s:'I-CPEX 2023',y:2023,e:'International Final Year Project Competition and Exhibition (I-CPEX) 2023',p:'Integrated Social Media Management Web Application'}
-],
-projects: [
- {n:'Solo Female Travel Safety',d:'Aspect-based sentiment analysis of TikTok travel content to map how women discuss safety, framed by my GSM-ABS conceptual framework.',tags:['NLP','ABSA','TikTok','Tourism'],aw:['seaim26'],pub:'tiktok-ijmoe'},
- {n:'SmartCarMate',d:'GPT and OBD-II diagnostics that explain vehicle health in plain language and support safer everyday driving.',tags:['GPT','OBD-II','IoT'],aw:['sirac','iciic-car','irice-drive'],pub:'obd-sijml'},
- {n:'FoodSnap',d:'AI-powered food discovery that nudges sustainable living and supports zero hunger.',tags:['AI','Mobile','SDG 2'],aw:['vic-food'],pub:'foodsnap'},
- {n:'FloodGuard',d:'Flood prediction and smart assistance for sustainable cities using Google ML Kit and the Gemini API.',tags:['AI','Gemini API','Smart city'],aw:['vic-flood','rice-flood'],pub:'flood'},
- {n:'Sustainable Fashion',d:'AI and IoT platform that connects communities around sustainable fashion.',tags:['AI','IoT','SDG 12'],aw:['jiiicas-fashion','i3dc-fashion'],pub:'fashion'},
- {n:'UniScholars Nexus',d:'GPT-powered platform for academic research discovery and collaboration.',tags:['AI','GPT','Research'],aw:['irice-uni','iciic-uni']},
- {n:'Anime Companion',d:'AI-powered anime companion for personalised interaction, wellbeing and language learning.',tags:['AI','Wellbeing','SDG 9 & 11'],aw:['iciic-anime','diiid-anime']},
- {n:'VibeFlow',d:'Unified social media app with AI-driven content moderation and detection of AI-generated information.',tags:['AI','Moderation','Social media'],aw:['diiid-vibeflow']},
- {n:'Bridging Minds',d:'AI-enhanced platform for secure and efficient research collaboration.',tags:['AI','Security','Research'],aw:['iniic25']},
- {n:'SkillBridge',d:'AI career matching that connects TVET graduates with suitable jobs.',tags:['AI','Matching','TVET'],aw:['i3dc-skill'],pub:'skillbridge'},
- {n:'Ocean Odyssey',d:'Game-based learning experience that teaches players about clean oceans.',tags:['Game','Education','SDG 14'],aw:['rice-ocean-sp','rice-ocean']},
- {n:'Smart Ticketing',d:'AI-powered IT ticketing with real-time progress tracking for universities.',tags:['AI','Web','IT ops'],aw:['irice-ticket'],pub:'ticketing'},
- {n:'MoodShelf',d:'Mood tracking app that supports personal growth and wellbeing.',tags:['Mobile','Wellbeing'],aw:['iniic-mood'],pub:'moodshelf'},
- {n:'SaaS Client Hub',d:'Unified client management with an integrated website builder and project life cycle tools.',tags:['SaaS','Web'],aw:['iniic-saas'],pub:'saas'},
- {n:'SmartResident',d:'Resident management centre system with a companion mobile application.',tags:['Mobile','Web','Community'],aw:['rice-resident','jiiicas-resident'],pub:'smartresident'},
- {n:'LifeFlow',d:'Predictive blood donation ecosystem for optimised healthcare resource management.',tags:['Predictive','Health'],aw:['irice-blood']},
- {n:'People’s Medical Service',d:'Medical service system that makes community healthcare easier to reach.',tags:['Health','Web'],aw:['rice-medical']},
- {n:'Animal Rescue',d:'Location-based, crowd-sourced platform for rescuing animals in need.',tags:['Location','Crowdsourcing'],aw:['rice-animal']},
- {n:'Bridging the Gap',d:'Practical solution for enhancing educational efficiency.',tags:['EdTech'],aw:['jiiicas-gap'],pub:'gap'},
- {n:'Social Media Manager',d:'Integrated web application for managing social media accounts.',tags:['Web','Social media'],aw:['icpex'],pub:'socialmedia'}
 ],
 certs: [
  ['Professional Technologist (Ts.)','MBOT','2025'],
@@ -546,17 +503,6 @@ $('#medals').innerHTML = ['gold','silver','bronze','special'].map(l =>
 const lvlColor = l => l === 'silver' ? 'var(--muted)' : `var(--${l})`;
 $('#awardList').innerHTML = D.awards.map(a =>
   `<div class="award">${medal(a.l, 34)}<div><span class="lvl" style="color:${lvlColor(a.l)}">${awardName(a)} · ${a.y}</span><h4>${a.p}</h4><p>${a.e}</p></div></div>`).join('');
-
-/* projects */
-$('#projList').innerHTML = D.projects.map(p => {
-  const pub = p.pub ? byKey(D.pubs, p.pub) : null;
-  return `<article class="proj"><div class="body">
-    <h4>${p.n}</h4>
-    <p>${p.d}</p><div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
-    <div class="wins">${p.aw.map(k => { const a = byKey(D.awards, k); return `<div>${medal(a.l, 20)}<span>${awardName(a)}, ${a.s}</span></div>`; }).join('')}
-    ${pub && pub.url ? `<a href="${pub.url}" target="_blank" rel="noopener">Read the paper ↗</a>` : pub ? `<a href="#publications">See publication ↑</a>` : ''}</div>
-  </div></article>`;
-}).join('');
 
 /* jury & certifications */
 $('#certList').innerHTML = D.certs.map(c => `<div class="cert"><div><b>${c[0]}</b> · ${c[1]}</div><span>${c[2]}</span></div>`).join('');
@@ -736,7 +682,6 @@ function monitor(x, rotY, tex) {
 }
 monitor(-0.86, 0.16, codeTex);
 monitor(0.86, -0.16, dashTex);
-hot(monitors, 'projects', 'Projects', new THREE.Vector3(0.86, 2.15, 0.2));
 
 /* code screen: lines type themselves out */
 const codeLines = [
