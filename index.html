@@ -564,7 +564,6 @@ $('#juryList').innerHTML = D.jury.map(j => `<li><span>${j[0]}</span><div>${j[1]}
 
 /* hologram stats */
 const juryCount = D.jury.length;
-$('#juryRole').textContent = `Jury for ${juryCount} competitions & conferences`;
 const paperCount = D.pubs.filter(p => p.type !== 'talk').length;
 $('#stats').innerHTML = [[paperCount,'Papers'],[D.awards.length,'Awards'],[juryCount,'Jury roles'],[new Date().getFullYear() - 2019 + '+','Yrs teaching']]
   .map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
@@ -1171,7 +1170,7 @@ const lHero = document.getElementById('lHero'), lHolo = document.getElementById(
 const nav = document.getElementById('nav'), counter = document.getElementById('counter');
 /* info cards appear one by one as the scan climbs, each joined to a point on the avatar */
 const linksSvg = document.getElementById('links');
-const cards = [['.hc1', 0.06, V(0, 1.45, 0.1)], ['.hsum', 0.38, V(-0.42, 0.1, 0.1)], ['.hc2', 0.66, V(0.3, 0.55, 0.2)], ['.hc3', 0.92, V(0.2, -0.5, 0.1)]]
+const cards = [['.hc1', 0.06, V(0, 1.45, 0.1)], ['.hsum', 0.4, V(-0.42, 0.1, 0.1)], ['.hc2', 0.75, V(0.3, 0.55, 0.2)]]
   .map(([sel, at, local]) => ({ el: lHolo.querySelector(sel), at, local }));
 function drawLinks() {
   const box = sticky.getBoundingClientRect();
@@ -1289,9 +1288,10 @@ document.querySelectorAll('[data-stage]').forEach(a => a.addEventListener('click
 }));
 
 document.fonts.ready.then(() => { codeTex.redraw(drawCode); dashTex.redraw(drawDash); redrawOnFonts.forEach(f => f()); drawQrNote(); });
-frame();
 const hideLoader = () => document.getElementById('loader').classList.add('gone');
 requestAnimationFrame(() => requestAnimationFrame(hideLoader)); setTimeout(hideLoader, 1500);
+frame();
+
 </script>
 </body>
 </html>
