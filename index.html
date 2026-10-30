@@ -741,7 +741,7 @@ mesh(rb(0.16, 0.05, 0.24, 0.025), M('#FFFFFF'), 0.8, deskTopY + 0.095, -0.12, ro
 const mug = new THREE.Group(); mug.position.set(1.45, deskTopY + 0.07, -0.35); room.add(mug);
 mesh(new THREE.CylinderGeometry(0.13, 0.12, 0.28, 24), M(C.salmon), 0, 0.14, 0, mug);
 mesh(new THREE.TorusGeometry(0.075, 0.025, 10, 20), M(C.salmon), 0.15, 0.15, 0, mug);
-mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.01, 20), M('#5A3A26'), 0, 0.27, 0, mug);
+mesh(new THREE.CylinderGeometry(0.122, 0.122, 0.012, 24), M('#4A2A18', { roughness: 0.25 }), 0, 0.28, 0, mug);   /* coffee, filled to the brim */
 const pens = new THREE.Group(); pens.position.set(-1.55, deskTopY + 0.07, -0.45); room.add(pens);
 mesh(new THREE.CylinderGeometry(0.12, 0.11, 0.3, 20), M('#FFFFFF'), 0, 0.15, 0, pens);
 [C.pink, C.plum, C.apricot].forEach((c, i) => {
@@ -766,67 +766,47 @@ for (let i = 0; i < 5; i++) {
   mesh(new THREE.SphereGeometry(0.07, 12, 10), M('#4A3F4F'), Math.sin(a) * 0.56, 0.09, Math.cos(a) * 0.56, chair);
 }
 
-/* ---------- avatar: chibi lecturer in a black hijab, beige vest and ID lanyard ---------- */
-const AV = {
-  skin: M('#E6B48E'), black: M('#25202A', { roughness: 0.8 }), blackD: M('#25202A', { roughness: 0.8, side: THREE.DoubleSide }),
-  vest: M('#DCCBB0', { roughness: 0.9, side: THREE.DoubleSide }), shoe: M('#17141A'), white: M('#FFFFFF'),
-  iris: M('#3A2318'), brow: M('#2A1A14'), nose: M('#D9A07E'), lip: M('#B65A60'), lanyard: M(C.pink), badge: M(C.salmon),
-  cheek: M('#F29A93', { transparent: true, opacity: 0.5 })
-};
-const lathe = (pts, mat, parent, phiStart = 0, phiLength = Math.PI * 2) =>
-  mesh(new THREE.LatheGeometry(pts.map(([r, y]) => new THREE.Vector2(r, y)), 48, phiStart, phiLength), mat, 0, 0, 0, parent);
-function makeAvatar() {
-  const g = new THREE.Group();   /* origin at the hips */
-  lathe([[0, -0.14], [0.27, -0.12], [0.31, 0.02], [0.28, 0.28], [0.3, 0.52], [0.34, 0.7], [0.3, 0.8], [0.14, 0.86], [0, 0.88]], AV.black, g);
-  lathe([[0.315, -0.04], [0.33, 0.06], [0.3, 0.3], [0.32, 0.52], [0.355, 0.69], [0.322, 0.79]], AV.vest, g, 0.42, Math.PI * 2 - 0.84);   /* vest, open at the front */
-  lathe([[0.16, 1.07], [0.22, 1.0], [0.25, 0.92], [0.24, 0.86]], AV.blackD, g);   /* hijab wraps the neck only */
-  for (const s of [-1, 1]) mesh(new THREE.CylinderGeometry(0.011, 0.011, 0.36, 6), AV.lanyard, s * 0.07, 0.53, 0.305, g).rotation.z = s * 0.2;
-  mesh(rb(0.12, 0.16, 0.02, 0.01), AV.white, 0, 0.32, 0.305, g);
-  mesh(rb(0.055, 0.055, 0.01, 0.005), AV.badge, 0, 0.34, 0.317, g);
-
-  const head = new THREE.Group(); head.position.y = 1.36; g.add(head);
-  mesh(new THREE.SphereGeometry(0.5, 48, 36), AV.black, 0, 0.04, -0.02, head).scale.set(1, 1.05, 1);
-  mesh(new THREE.SphereGeometry(0.37, 48, 36), AV.skin, 0, -0.01, 0.17, head);
-  for (const s of [-1, 1]) {
-    mesh(new THREE.SphereGeometry(0.062, 18, 14), AV.white, s * 0.13, 0, 0.495, head).scale.set(1, 1.1, 0.5);
-    mesh(new THREE.SphereGeometry(0.046, 18, 14), AV.iris, s * 0.13, -0.005, 0.517, head).scale.z = 0.45;
-    mesh(new THREE.SphereGeometry(0.014, 8, 8), AV.white, s * 0.13 + 0.016, 0.022, 0.537, head);
-    mesh(rb(0.11, 0.022, 0.02, 0.008), AV.brow, s * 0.13, 0.105, 0.5, head).rotation.z = -s * 0.1;
-    const ch = mesh(new THREE.SphereGeometry(0.055, 12, 10), AV.cheek, s * 0.22, -0.09, 0.465, head); ch.scale.z = 0.3; ch.castShadow = false;
-  }
-  mesh(new THREE.SphereGeometry(0.03, 10, 8), AV.nose, 0, -0.065, 0.535, head);
-  mesh(new THREE.TorusGeometry(0.05, 0.012, 8, 16, Math.PI), AV.lip, 0, -0.13, 0.51, head).rotation.z = Math.PI;
-
-  const arms = [], legs = [];
-  for (const s of [-1, 1]) {
-    const arm = new THREE.Group(); arm.position.set(s * 0.37, 0.72, 0); g.add(arm);
-    mesh(new THREE.CapsuleGeometry(0.095, 0.26, 6, 14), AV.black, 0, -0.17, 0, arm);
-    const elbow = new THREE.Group(); elbow.position.y = -0.36; arm.add(elbow);
-    mesh(new THREE.CapsuleGeometry(0.085, 0.22, 6, 14), AV.black, 0, -0.14, 0, elbow);
-    mesh(new THREE.SphereGeometry(0.085, 16, 12), AV.skin, 0, -0.32, 0.01, elbow);
-    arms.push({ arm, elbow, s });
-
-    const hip = new THREE.Group(); hip.position.set(s * 0.15, -0.06, 0); g.add(hip);
-    mesh(new THREE.CylinderGeometry(0.155, 0.16, 0.48, 20), AV.black, 0, -0.22, 0, hip);
-    const knee = new THREE.Group(); knee.position.y = -0.46; hip.add(knee);
-    mesh(new THREE.CylinderGeometry(0.16, 0.178, 0.48, 20), AV.black, 0, -0.22, 0, knee);
-    mesh(rb(0.21, 0.12, 0.33, 0.055), AV.shoe, 0, -0.5, 0.05, knee);
-    legs.push({ hip, knee, s });
-  }
-  g.userData = { head, arms, legs };
-  return g;
-}
-/* blend between seated (0) and standing (1); `bend` tucks the knees and lifts the arms for a hop */
+/* ---------- staff ID badge: left on the chair, it flies down to the stage and is scanned into a hologram ---------- */
 const mix = (a, b, t) => a + (b - a) * t;
-function pose(av, stand, bend = 0, typing = 0) {
-  for (const { arm, elbow, s } of av.userData.arms) {
-    arm.rotation.set(mix(-0.75, 0, stand) - bend * 0.3, 0, s * (mix(0.08, 0.13, stand) + bend * 0.55));
-    elbow.rotation.x = mix(-0.75 + typing * s, -0.12, stand) - bend * 0.4;
-  }
-  for (const { hip, knee } of av.userData.legs) {
-    hip.rotation.x = mix(-Math.PI / 2, 0, stand) - bend * 0.55;
-    knee.rotation.x = mix(Math.PI / 2, 0, stand) + bend * 1.0;
-  }
+const CARD_W = 1.1, CARD_H = 1.6;
+function drawBadge(ctx, w, h, holo) {
+  const ink = holo ? '#FFAAC4' : '#2E1F2B', soft = holo ? 'rgba(255,170,196,.75)' : '#76626C', accent = holo ? '#FFE3EC' : '#C9506A';
+  ctx.fillStyle = holo ? '#000' : '#FFFCFA'; ctx.fillRect(0, 0, w, h);
+  if (holo) { ctx.strokeStyle = ink; ctx.lineWidth = 6; ctx.strokeRect(10, 10, w - 20, h - 20); }
+  const g = ctx.createLinearGradient(0, 0, w, 0);
+  if (holo) { g.addColorStop(0, 'rgba(255,170,196,.35)'); g.addColorStop(1, 'rgba(255,170,196,.35)'); }
+  else { g.addColorStop(0, '#FFC57D'); g.addColorStop(.5, '#FF9E9E'); g.addColorStop(1, '#FFAAC4'); }
+  ctx.fillStyle = g; ctx.fillRect(0, 0, w, 140);
+  ctx.fillStyle = holo ? '#000' : '#4A2350'; ctx.beginPath(); ctx.roundRect(w / 2 - 50, 26, 100, 20, 10); ctx.fill();
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = holo ? ink : '#2E1F2B'; ctx.font = '700 19px "JetBrains Mono", monospace'; ctx.fillText('SOUTHERN UNIVERSITY COLLEGE', w / 2, 100);
+  ctx.fillStyle = holo ? 'rgba(255,170,196,.25)' : '#4A2350'; ctx.beginPath(); ctx.arc(w / 2, 230, 74, 0, 7); ctx.fill();
+  ctx.strokeStyle = holo ? ink : '#FFAAC4'; ctx.lineWidth = 7; ctx.stroke();
+  ctx.fillStyle = holo ? '#FFE3EC' : '#FFFFFF'; ctx.font = '800 64px Outfit, sans-serif'; ctx.fillText('NS', w / 2, 252);
+  ctx.fillStyle = ink; ctx.font = '800 46px Outfit, sans-serif'; ctx.fillText('Nur Shamilla', w / 2, 360); ctx.fillText('Selamat', w / 2, 408);
+  ctx.fillStyle = accent; ctx.font = '700 22px "JetBrains Mono", monospace'; ctx.fillText('SENIOR LECTURER', w / 2, 450);
+  ctx.fillStyle = soft; ctx.font = '500 23px "DM Sans", sans-serif';
+  ['Professional Technologist', 'Accredited HRDCorp Trainer', 'Computer Science'].forEach((l, i) => ctx.fillText(l, w / 2, 484 + i * 30));
+  const q = document.createElement('canvas'); q.width = q.height = 140;
+  if (window.drawQR) window.drawQR(q, window.qrPayload(), holo ? { fg: '#FFAAC4', bg: '#000', eye: '#FFE3EC', pad: 1 } : { pad: 1 });
+  ctx.drawImage(q, (w - 140) / 2, 570);
+  ctx.fillStyle = holo ? ink : '#FFAAC4'; ctx.fillRect(0, h - 14, w, 14);
+}
+const badgeTex = fontTex(512, 745, (ctx, w, h) => drawBadge(ctx, w, h, false));
+const badgeHoloTex = fontTex(512, 745, (ctx, w, h) => drawBadge(ctx, w, h, true));
+/* origin at the middle of the card; the lanyard rises above it */
+function makeBadge(holoMat) {
+  const g = new THREE.Group();
+  const body = holoMat || M(C.salmon, { roughness: 0.5 });
+  mesh(rb(CARD_W, CARD_H, 0.05, 0.08), body, 0, 0, 0, g);
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(CARD_W - 0.06, CARD_H - 0.06), holoMat
+    ? new THREE.MeshBasicMaterial({ map: badgeHoloTex.t, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false })
+    : new THREE.MeshStandardMaterial({ map: badgeTex.t, roughness: 0.55 }));
+  face.position.z = 0.027; g.add(face);
+  const clip = holoMat || M('#C8C3CC', { metalness: 0.6, roughness: 0.3 }), strap = holoMat || M(C.plum);
+  mesh(rb(0.16, 0.12, 0.06, 0.02), clip, 0, CARD_H / 2 + 0.04, 0, g);
+  for (const s of [-1, 1]) mesh(rb(0.07, 0.95, 0.012, 0.005), strap, s * 0.17, CARD_H / 2 + 0.5, -0.01, g).rotation.z = s * 0.36;
+  return g;
 }
 
 /* ---------- bookshelf (publications) ---------- */
@@ -863,7 +843,7 @@ function bushyPlant(x, z, potColor, scale = 1) {
   mesh(new THREE.CylinderGeometry(0.29, 0.29, 0.02, 24), M('#5A3A26'), 0, 0.59, 0, p);
   const leaves = new THREE.Group(); leaves.position.y = 0.6; p.add(leaves);
   for (let i = 0; i < 9; i++) {
-    const a = (i / 9) * Math.PI * 2, l = mesh(new THREE.SphereGeometry(0.2, 16, 12), M(i % 2 ? '#5E9E5A' : '#79B86B'), Math.sin(a) * 0.18, 0.45 + (i % 3) * 0.22, Math.cos(a) * 0.18, leaves);
+    const a = (i / 9) * Math.PI * 2, l = mesh(new THREE.SphereGeometry(0.2, 16, 12), M(i % 2 ? '#5E9E5A' : '#79B86B'), Math.sin(a) * 0.14, 0.24 + (i % 3) * 0.16, Math.cos(a) * 0.14, leaves);
     l.scale.set(0.55, 1.6, 0.3); l.rotation.set(Math.cos(a) * 0.5, a, -Math.sin(a) * 0.5);
   }
   sway.push(leaves); return p;
@@ -871,7 +851,8 @@ function bushyPlant(x, z, potColor, scale = 1) {
 function snakePlant(x, z, potColor, parent = room, y = 0, scale = 1) {
   const p = new THREE.Group(); p.position.set(x, y, z); p.scale.setScalar(scale); parent.add(p);
   mesh(new THREE.CylinderGeometry(0.24, 0.2, 0.42, 24), M(potColor), 0, 0.21, 0, p);
-  const leaves = new THREE.Group(); leaves.position.y = 0.4; p.add(leaves);
+  mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.02, 24), M('#5A3A26'), 0, 0.41, 0, p);   /* soil */
+  const leaves = new THREE.Group(); leaves.position.y = 0.36; p.add(leaves);
   for (let i = 0; i < 7; i++) {
     const a = (i / 7) * Math.PI * 2, h = 0.7 + (i % 3) * 0.22;
     const l = mesh(new THREE.CapsuleGeometry(0.07, h, 4, 10), M(i % 2 ? '#3F7D4E' : '#5C9B5E'), Math.sin(a) * 0.09, h / 2, Math.cos(a) * 0.09, leaves);
@@ -879,21 +860,125 @@ function snakePlant(x, z, potColor, parent = room, y = 0, scale = 1) {
   }
   sway.push(leaves); return p;
 }
-function trailingPlant(parent, x, y, z, potColor, drop = 0.9) {
-  const p = new THREE.Group(); p.position.set(x, y, z); parent.add(p);
-  mesh(new THREE.CylinderGeometry(0.15, 0.12, 0.2, 20), M(potColor), 0, 0.1, 0, p);
-  const leaves = new THREE.Group(); p.add(leaves);
-  for (let i = 0; i < 6; i++) mesh(new THREE.SphereGeometry(0.08, 10, 8), M(i % 2 ? '#5E9E5A' : '#79B86B'), Math.cos(i) * 0.1, 0.24, Math.sin(i) * 0.1, leaves).scale.set(1, 0.6, 1);
-  for (const side of [-1, 1]) for (let i = 0; i < 7; i++) {
-    const l = mesh(new THREE.SphereGeometry(0.065, 10, 8), M(i % 2 ? '#5E9E5A' : '#79B86B'), side * (0.15 + i * 0.012), 0.12 - i * drop / 7, 0.1 + (i % 2) * 0.04, leaves);
-    l.scale.set(0.6, 1, 0.35);
+/* monstera: split, holey leaves on long stems that arch out of the pot */
+const monsteraLeaf = (() => {
+  const sh = new THREE.Shape();
+  sh.moveTo(0, 0); sh.bezierCurveTo(0.3, 0.02, 0.34, 0.42, 0, 0.64); sh.bezierCurveTo(-0.34, 0.42, -0.3, 0.02, 0, 0);
+  for (const side of [-1, 1]) for (let k = 0; k < 3; k++) {
+    const h = new THREE.Path(); h.absellipse(side * (0.12 + k * 0.012), 0.16 + k * 0.15, 0.03, 0.05, 0, Math.PI * 2, side > 0); sh.holes.push(h);
+  }
+  return new THREE.ShapeGeometry(sh, 10);
+})();
+function monstera(x, z, potColor, scale = 1) {
+  const p = new THREE.Group(); p.position.set(x, 0, z); p.scale.setScalar(scale); room.add(p);
+  mesh(new THREE.CylinderGeometry(0.3, 0.24, 0.5, 28), M(potColor), 0, 0.25, 0, p);
+  mesh(new THREE.CylinderGeometry(0.27, 0.27, 0.02, 24), M('#5A3A26'), 0, 0.49, 0, p);
+  const leaves = new THREE.Group(); leaves.position.y = 0.48; p.add(leaves);
+  const stem = M('#5C8A4A'), leafMats = [M('#2F6B3F', { side: THREE.DoubleSide }), M('#3E7D4A', { side: THREE.DoubleSide })];
+  for (let i = 0; i < 7; i++) {
+    const arm = new THREE.Group(); arm.rotation.y = (i / 7) * Math.PI * 2 + i * 0.4; leaves.add(arm);
+    const len = 0.55 + (i % 3) * 0.2, tilt = 0.25 + (i % 2) * 0.25;
+    mesh(new THREE.CylinderGeometry(0.014, 0.018, len, 6), stem, 0, Math.cos(tilt) * len / 2, Math.sin(tilt) * len / 2, arm).rotation.x = tilt;
+    const leaf = mesh(monsteraLeaf, leafMats[i % 2], 0, Math.cos(tilt) * len, Math.sin(tilt) * len, arm);
+    leaf.rotation.set(1.05 + (i % 3) * 0.15, 0, (i % 2 ? 0.2 : -0.2));
+    leaf.scale.setScalar(0.9 + (i % 3) * 0.12);
   }
   sway.push(leaves); return p;
 }
-bushyPlant(3.45, -1.25, '#FFFFFF');
-bushyPlant(-2.95, 0.75, C.pink, 0.7);
-snakePlant(-2.3, -0.3, C.salmon);
-snakePlant(-0.42, 0.05, C.apricot, shelf, 2.64, 0.45);
+/* fiddle leaf fig: slim trunk with big violin-shaped leaves clustered towards the top */
+const fiddleLeaf = (() => {
+  const sh = new THREE.Shape();
+  sh.moveTo(0, 0); sh.bezierCurveTo(0.1, 0.03, 0.09, 0.14, 0.12, 0.24); sh.bezierCurveTo(0.17, 0.36, 0.1, 0.44, 0, 0.42);
+  sh.bezierCurveTo(-0.1, 0.44, -0.17, 0.36, -0.12, 0.24); sh.bezierCurveTo(-0.09, 0.14, -0.1, 0.03, 0, 0);
+  return new THREE.ShapeGeometry(sh, 10);
+})();
+function fiddleLeafFig(x, z, potColor, scale = 1) {
+  const p = new THREE.Group(); p.position.set(x, 0, z); p.scale.setScalar(scale); room.add(p);
+  mesh(new THREE.CylinderGeometry(0.26, 0.21, 0.46, 28), M(potColor), 0, 0.23, 0, p);
+  mesh(new THREE.CylinderGeometry(0.23, 0.23, 0.02, 24), M('#5A3A26'), 0, 0.45, 0, p);
+  mesh(new THREE.CylinderGeometry(0.025, 0.035, 1.3, 8), M('#8A6A4A'), 0, 1.1, 0, p);
+  const leaves = new THREE.Group(); leaves.position.y = 0.46; p.add(leaves);
+  const mats = [M('#2E6A3C', { side: THREE.DoubleSide }), M('#3F7F48', { side: THREE.DoubleSide })];
+  for (let i = 0; i < 16; i++) {
+    const y = 0.55 + (i / 16) * 0.85, a = i * 2.4;
+    const arm = new THREE.Group(); arm.position.y = y; arm.rotation.y = a; leaves.add(arm);
+    const leaf = mesh(fiddleLeaf, mats[i % 2], 0, 0, 0.02, arm);
+    leaf.rotation.x = 0.7 + (i % 3) * 0.25 - (i > 12 ? 0.4 : 0);
+    leaf.scale.setScalar(1.15 - (i / 16) * 0.35);
+  }
+  sway.push(leaves); return p;
+}
+/* golden pothos: a pot of variegated heart leaves whose vines spill over the shelf edge */
+const pothosLeaf = (() => {
+  const sh = new THREE.Shape();
+  sh.moveTo(0, 0); sh.bezierCurveTo(0.08, -0.03, 0.1, 0.07, 0, 0.14); sh.bezierCurveTo(-0.1, 0.07, -0.08, -0.03, 0, 0);
+  return new THREE.ShapeGeometry(sh, 8);
+})();
+function pothos(parent, x, y, z, potColor, vines) {
+  const p = new THREE.Group(); p.position.set(x, y, z); parent.add(p);
+  mesh(new THREE.CylinderGeometry(0.17, 0.13, 0.22, 24), M(potColor), 0, 0.11, 0, p);
+  mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.02, 20), M('#5A3A26'), 0, 0.21, 0, p);
+  const leafMats = ['#4E8F3E', '#7FB24A', '#B9CF5A'].map(c => M(c, { side: THREE.DoubleSide, roughness: 0.55 }));
+  const stem = M('#6E9A44'), g = new THREE.Group(); p.add(g);
+  let n = 0;
+  for (let i = 0; i < 9; i++) {   /* bushy crown */
+    const a = i * 2.4, l = mesh(pothosLeaf, leafMats[n++ % 3], Math.sin(a) * 0.08, 0.22 + (i % 3) * 0.04, Math.cos(a) * 0.08, g);
+    l.rotation.set(-0.5, a, 0); l.scale.setScalar(1.3);
+  }
+  for (const [dx, len, dz] of vines) {   /* vines arch over the edge, then hang straight down */
+    const curve = new THREE.CatmullRomCurve3([[0, 0.2, 0], [dx * 0.4, 0.2, dz * 0.6], [dx * 0.8, 0.05, dz], [dx, -len * 0.5, dz + 0.02], [dx * 1.1, -len, dz + 0.04]].map(v => new THREE.Vector3(...v)));
+    mesh(new THREE.TubeGeometry(curve, 24, 0.006, 5), stem, 0, 0, 0, g);
+    const count = Math.round(len / 0.09) + 3;
+    for (let k = 1; k <= count; k++) {
+      const t = k / (count + 0.5), pt = curve.getPoint(t), side = k % 2 ? 1 : -1;
+      const l = mesh(pothosLeaf, leafMats[n++ % 3], pt.x + side * 0.02, pt.y, pt.z + 0.015, g);
+      l.rotation.set(t < 0.3 ? -0.9 : 0.15, side * 0.35, Math.PI + side * 0.7);
+      l.scale.setScalar(1.1 - t * 0.35); l.castShadow = false;
+    }
+  }
+  sway.push(g); return p;
+}
+/* phalaenopsis: broad leaves at the base and an arching stem of flowers */
+function orchid(parent, x, y, z, potColor, flower, lipColor, scale = 1, rotY = 0) {
+  const p = new THREE.Group(); p.position.set(x, y, z); p.scale.setScalar(scale); p.rotation.y = rotY; parent.add(p);
+  mesh(new THREE.CylinderGeometry(0.2, 0.16, 0.34, 24), M(potColor), 0, 0.17, 0, p);
+  mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.02, 20), M('#8A5A3A'), 0, 0.33, 0, p);
+  for (let i = 0; i < 5; i++) {
+    const a = (i / 5) * Math.PI * 2 + 0.3, l = mesh(new THREE.SphereGeometry(0.17, 14, 10), M(i % 2 ? '#3F7D4E' : '#4E8F57'), Math.sin(a) * 0.13, 0.37, Math.cos(a) * 0.13, p);
+    l.scale.set(0.45, 0.12, 1); l.rotation.set(0.25, a, 0);
+  }
+  const plant = new THREE.Group(); plant.position.y = 0.34; p.add(plant);
+  const stemPts = [[0, 0, 0], [0.02, 0.35, 0], [0.06, 0.65, 0.02], [0.2, 0.82, 0.06], [0.38, 0.8, 0.1], [0.5, 0.68, 0.12]].map(v => new THREE.Vector3(...v));
+  const curve = new THREE.CatmullRomCurve3(stemPts);
+  mesh(new THREE.TubeGeometry(curve, 30, 0.012, 6), M('#5C7A3E'), 0, 0, 0, plant);
+  mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.7, 6), M('#9C7B55'), -0.04, 0.35, 0, plant);
+  const petal = M(flower), lip = M(lipColor), eye = M(C.lemon);
+  [0.5, 0.62, 0.74, 0.86, 0.97].forEach((t, i) => {
+    const f = new THREE.Group(); f.position.copy(curve.getPoint(t)); f.position.y -= 0.05; f.rotation.y = 0.5; f.scale.setScalar(1 - i * 0.08); plant.add(f);
+    for (let k = 0; k < 5; k++) {
+      const a = (k / 5) * Math.PI * 2, pe = mesh(new THREE.SphereGeometry(0.055, 10, 8), petal, Math.sin(a) * 0.05, Math.cos(a) * 0.05, 0, f);
+      pe.scale.set(k % 2 ? 0.8 : 1, 1, 0.25); pe.rotation.z = -a; pe.castShadow = false;
+    }
+    mesh(new THREE.SphereGeometry(0.025, 8, 6), lip, 0, -0.02, 0.02, f).castShadow = false;
+    mesh(new THREE.SphereGeometry(0.012, 6, 6), eye, 0, 0.005, 0.03, f).castShadow = false;
+  });
+  sway.push(plant); return p;
+}
+/* round plant stand that fills the corner beside the desk */
+function plantStand(x, z, h) {
+  const g = new THREE.Group(); g.position.set(x, 0, z); room.add(g);
+  mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.06, 32), M('#D9A86C'), 0, h, 0, g);
+  for (let i = 0; i < 3; i++) {
+    const a = (i / 3) * Math.PI * 2, leg = mesh(new THREE.CylinderGeometry(0.03, 0.025, h, 10), M('#D9A86C'), Math.sin(a) * 0.24, h / 2, Math.cos(a) * 0.24, g);
+    leg.rotation.set(Math.cos(a) * 0.08, 0, -Math.sin(a) * 0.08);
+  }
+  return h + 0.03;
+}
+bushyPlant(2.5, 0.05, '#FFFFFF');
+fiddleLeafFig(-2.3, -0.3, C.salmon);
+monstera(3.35, -0.4, C.pink, 0.85);
+pothos(shelf, -0.42, 2.64, 0.1, C.apricot, [[-0.12, 1.15, 0.26], [0.02, 0.75, 0.25], [0.14, 1.45, 0.27], [-0.22, 0.55, 0.22]]);
+orchid(room, 2.55, plantStand(2.55, -0.95, 0.95), -0.95, '#FFFFFF', '#EEDDF7', '#9B5DC8', 1.1, -0.4);
 
 /* ---------- certificate frames (credentials) ---------- */
 const frames = new THREE.Group(); frames.position.set(-3.35, 3.55, -1.25); room.add(frames);
@@ -971,36 +1056,6 @@ drawQrNote();
 note(0.5, 0.02, 0.62, 0.73, 0.04, qrNote.t);
 hot(board, 'contact', 'Scan me', new THREE.Vector3(0.5, -0.5, 0.15));
 
-/* ---------- mini fridge with travel magnets ---------- */
-const fridge = new THREE.Group(); fridge.position.set(2.6, 0, -0.95); room.add(fridge);
-mesh(rb(0.95, 1.45, 0.8, 0.1), M('#FFE3DA'), 0, 0.725, 0, fridge);
-mesh(rb(0.9, 0.015, 0.02, 0.006), M('#E8BFB3'), 0, 1.02, 0.4, fridge);
-mesh(rb(0.04, 0.5, 0.05, 0.02), chrome, -0.38, 0.62, 0.43, fridge);
-mesh(rb(0.04, 0.22, 0.05, 0.02), chrome, -0.38, 1.2, 0.43, fridge);
-const ink = '#3A1C46';
-const magnetArt = {
-  'KUALA LUMPUR': ctx => { ctx.fillStyle = ink; for (const x of [96, 142]) { ctx.fillRect(x, 50, 18, 80); ctx.beginPath(); ctx.moveTo(x, 50); ctx.lineTo(x + 9, 18); ctx.lineTo(x + 18, 50); ctx.fill(); } ctx.fillRect(114, 86, 28, 7); },
-  'KUCHING': ctx => { ctx.fillStyle = ink; ctx.beginPath(); ctx.arc(128, 86, 38, 0, 7); ctx.fill(); ctx.beginPath(); ctx.moveTo(94, 70); ctx.lineTo(98, 30); ctx.lineTo(124, 52); ctx.moveTo(162, 70); ctx.lineTo(158, 30); ctx.lineTo(132, 52); ctx.fill(); ctx.fillStyle = '#FFF591'; ctx.beginPath(); ctx.ellipse(114, 84, 6, 9, 0, 0, 7); ctx.ellipse(142, 84, 6, 9, 0, 0, 7); ctx.fill(); },
-  'LANGKAWI': ctx => { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(128, 20); ctx.lineTo(128, 100); ctx.lineTo(180, 100); ctx.fill(); ctx.fillStyle = ink; ctx.beginPath(); ctx.moveTo(80, 106); ctx.lineTo(180, 106); ctx.lineTo(166, 126); ctx.lineTo(94, 126); ctx.fill(); },
-  'MELAKA': ctx => { ctx.fillStyle = '#B23A48'; ctx.fillRect(100, 52, 56, 80); ctx.beginPath(); ctx.moveTo(94, 54); ctx.lineTo(128, 22); ctx.lineTo(162, 54); ctx.fill(); ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(128, 78, 14, 0, 7); ctx.fill(); ctx.fillStyle = ink; ctx.fillRect(127, 68, 3, 11); ctx.fillRect(127, 77, 9, 3); },
-  'SINGAPORE': ctx => { ctx.fillStyle = ink; for (const x of [84, 118, 152]) ctx.fillRect(x, 50, 22, 80); ctx.beginPath(); ctx.moveTo(70, 50); ctx.lineTo(186, 42); ctx.lineTo(190, 50); ctx.lineTo(74, 56); ctx.fill(); },
-  'BANGKOK': ctx => { ctx.fillStyle = ink; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(78 + i * 14, 130 - i * 26); ctx.lineTo(128, 70 - i * 26); ctx.lineTo(178 - i * 14, 130 - i * 26); ctx.fill(); } ctx.fillRect(126, 4, 4, 26); }
-};
-const magnetBg = [C.pink, C.apricot, '#BFE3F2', C.lemon, C.salmon, C.peach];
-Object.entries(magnetArt).forEach(([city, drawIcon], i) => {
-  const tex = fontTex(256, 192, (ctx, w, h) => {
-    ctx.fillStyle = magnetBg[i]; ctx.fillRect(0, 0, w, h);
-    drawIcon(ctx);
-    ctx.fillStyle = ink; ctx.font = '800 24px Outfit, sans-serif'; ctx.textAlign = 'center'; ctx.fillText(city, w / 2, 172);
-  });
-  const col = i % 2, row = Math.floor(i / 2);
-  const m = new THREE.Group(); m.position.set(-0.08 + col * 0.36 - 0.1, 1.24 - row * 0.32 - (row ? 0.08 : 0), 0.42); m.rotation.z = (rand() - 0.5) * 0.25; fridge.add(m);
-  mesh(rb(0.31, 0.24, 0.03, 0.012), M('#FFFFFF'), 0, 0, 0, m);
-  const face = new THREE.Mesh(new THREE.PlaneGeometry(0.29, 0.22), new THREE.MeshStandardMaterial({ map: tex.t, roughness: 0.6 }));
-  face.position.z = 0.017; m.add(face);
-});
-trailingPlant(fridge, 0.15, 1.45, 0.05, C.pink, 0.8);
-
 /* ---------- hologram stage (about) ---------- */
 const HY = -14;   /* the stage sits below the office; the camera pans down to it */
 const holo = new THREE.Group(); holo.position.set(0, HY, 0); scene.add(holo);
@@ -1054,17 +1109,17 @@ const holoShader = new THREE.ShaderMaterial({
   transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, clipping: true, clippingPlanes: [scanHolo]
 });
 const me = new THREE.Group(); scene.add(me);
-const solidMe = makeAvatar(), ghostMe = makeAvatar();
+const solidMe = makeBadge(), ghostMe = makeBadge(holoShader);
 solidMe.traverse(o => { if (o.isMesh) { o.material = o.material.clone(); o.material.clippingPlanes = [scanSolid]; } });
-ghostMe.traverse(o => { if (o.isMesh) { o.material = holoShader; o.castShadow = o.receiveShadow = false; } });
+ghostMe.traverse(o => { if (o.isMesh) { if (o.material !== holoShader) o.material.clippingPlanes = [scanHolo]; o.castShadow = o.receiveShadow = false; } });
 me.add(solidMe, ghostMe);
 const scanRing = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.018, 8, 64), new THREE.MeshBasicMaterial({ color: '#FFE3EC', transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
 scanRing.rotation.x = Math.PI / 2; scanRing.scale.set(1, 0.7, 1); scene.add(scanRing);
 const scanDisc = new THREE.Mesh(new THREE.CircleGeometry(0.62, 48), new THREE.MeshBasicMaterial({ color: C.pink, transparent: true, opacity: 0.18, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }));
 scanDisc.rotation.x = -Math.PI / 2; scanDisc.scale.set(1, 0.7, 1); scene.add(scanDisc);
-const AV_BOTTOM = -1.08, AV_TOP = 1.95;
-/* where the avatar sits, where she lands after hopping off the chair, and the platform */
-const SEAT = new THREE.Vector3(0, 1.1, 0.72), SPOT = new THREE.Vector3(1.2, 0.97, 1.9);
+const AV_BOTTOM = -CARD_H / 2, AV_TOP = CARD_H / 2 + 0.95;
+/* the badge hangs on the back of the chair, lifts up in front of the desk, then flies down to the platform */
+const SEAT = new THREE.Vector3(0, 1.6, 1.365), SPOT = new THREE.Vector3(1.1, 2.3, 2.1);
 const holoLight = new THREE.PointLight(0xFFAAC4, 7, 6); holoLight.position.set(0, 0.8, 1.2); holo.add(holoLight);
 const holoKey = new THREE.PointLight(0xFFE6D8, 5, 7); holoKey.position.set(1.2, 2.6, 2.4); holo.add(holoKey);
 
@@ -1118,7 +1173,7 @@ const lHero = document.getElementById('lHero'), lHolo = document.getElementById(
 const nav = document.getElementById('nav'), counter = document.getElementById('counter');
 /* info cards appear one by one as the scan climbs, each joined to a point on the avatar */
 const linksSvg = document.getElementById('links');
-const cards = [['.hc1', 0.06, V(0, 1.45, 0.1)], ['.hsum', 0.4, V(-0.42, 0.1, 0.1)], ['.hc2', 0.75, V(0.3, 0.55, 0.2)]]
+const cards = [['.hc1', 0.06, V(0, 0.32, 0.03)], ['.hsum', 0.4, V(-0.4, -0.45, 0.03)], ['.hc2', 0.75, V(0.42, -0.1, 0.03)]]
   .map(([sel, at, local]) => ({ el: lHolo.querySelector(sel), at, local }));
 function drawLinks() {
   const box = sticky.getBoundingClientRect();
@@ -1137,7 +1192,7 @@ function drawLinks() {
 let pSmooth = 0, roomVisible = true, lastType = 0;
 const clock = new THREE.Clock();
 const tmp = new THREE.Vector3();
-const PLAT = new THREE.Vector3(0, HY + 1.42, 0);
+const PLAT = new THREE.Vector3(0, HY + 1.6, 0);
 
 function frame() {
   requestAnimationFrame(frame);
@@ -1162,18 +1217,16 @@ function frame() {
   camera.setViewOffset(W, H, -sx, -sy, W, H);
   holo.visible = pan > 0.02;
 
-  /* avatar path */
+  /* badge path */
   const yawCam = Math.atan2(K.p0.x, K.p0.z);
   const at = lerpV(lerpV(SEAT, SPOT, u), PLAT, fall);
-  at.y += Math.sin(u * Math.PI) * 0.7 + Math.sin(fall * Math.PI) * 1.2;
-  me.position.copy(at);
+  at.y += Math.sin(fall * Math.PI) * 0.8;
   const settle = clamp01((p - 0.5) / 0.06);
-  me.rotation.y = mix(mix(Math.PI, yawCam, u), 0, fall) + (reduce ? 0 : Math.sin(t * 0.45) * 0.45 * settle);
-  me.scale.setScalar(mix(0.9, 1, fall));
-  const typing = u === 0 && !reduce ? Math.sin(t * 12) * 0.06 : 0;
-  const bend = Math.sin(u * Math.PI) * 0.8 + Math.sin(fall * Math.PI) * 0.6;
-  pose(solidMe, u, bend, typing); pose(ghostMe, u, bend, typing);
-  if (!reduce) solidMe.userData.head.rotation.z = ghostMe.userData.head.rotation.z = Math.sin(t * 0.85) * 0.05;
+  if (!reduce) at.y += Math.sin(t * 1.3) * 0.05 * settle;
+  me.position.copy(at);
+  me.rotation.x = mix(-0.08, 0, u);
+  me.rotation.y = mix(mix(0, yawCam, u), Math.PI * 2, fall) + (reduce ? 0 : Math.sin(t * 0.45) * 0.35 * settle);
+  me.scale.setScalar(mix(mix(0.36, 0.6, u), 1, fall));
 
   /* cream office panel slides up with the room, uncovering the stage */
   tmp.set(0, -2.4, 3.2).project(camera);
